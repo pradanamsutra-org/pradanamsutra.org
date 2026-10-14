@@ -14,29 +14,52 @@ export function LogoMark({ className }: { className?: string }) {
     <Image
       src="/pradanam-mark.png"
       alt=""
-      width={1158}
-      height={661}
+      width={792}
+      height={455}
       priority
       className={cn('h-7 w-auto object-contain', className)}
     />
   );
 }
 
-/** Clicking the mark or the wordmark goes home, as a masthead should. */
+/**
+ * Two lockups, both clicking home as a masthead should.
+ *
+ * `stacked` is the primary one — the emblem with the wordmark centred beneath
+ * it, set in the display serif, as the brand sheet draws it. It is for the
+ * public mastheads, where the logo is the page's crown.
+ *
+ * The default horizontal lockup keeps the UI sans and sits on one line: inside
+ * product chrome (a dashboard rail, an auth card, a checkout step) the logo is
+ * a label among other labels, and the serif would shout over them.
+ */
 export function Logo({
   className,
   href = '/',
   compact = false,
+  stacked = false,
 }: {
   className?: string;
   href?: string;
   compact?: boolean;
+  stacked?: boolean;
 }) {
+  if (stacked && !compact) {
+    return (
+      <Link
+        href={href}
+        className={cn('group inline-flex flex-col items-center gap-1 text-ink', className)}
+      >
+        <LogoMark className="h-12 w-auto transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105 sm:h-14" />
+        <span className="whitespace-nowrap font-display text-[12px] font-semibold uppercase leading-none tracking-[0.14em] text-brand sm:text-[13.5px]">
+          {BRAND_NAME}
+        </span>
+      </Link>
+    );
+  }
+
   return (
-    <Link
-      href={href}
-      className={cn('group inline-flex items-center gap-2 text-ink', className)}
-    >
+    <Link href={href} className={cn('group inline-flex items-center gap-2 text-ink', className)}>
       <LogoMark className="h-7 w-auto transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105" />
       {/* Set tight: the emblem beside it is already wide, so a widely tracked
           wordmark pushed the whole block past half a phone's header. Enough

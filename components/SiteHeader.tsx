@@ -45,13 +45,24 @@ export function SiteHeader() {
           open && 'bg-paper/95 shadow-[0_18px_50px_-20px_rgba(10,20,40,0.45)]'
         )}
       >
+        {/*
+          Below lg the masthead is centred: a three-column grid with an empty
+          cell opposite the menu button, so the logo sits dead centre however
+          wide the button is. From lg the row goes back to logo-left, links in
+          the middle, call to action right.
+        */}
         <nav
           className={cn(
-            'relative flex items-center justify-between transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]',
-            shaped ? 'py-2 pl-4 pr-2 sm:pl-5' : 'px-3 py-5 sm:px-6 lg:px-10'
+            'relative grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] lg:flex lg:justify-between',
+            shaped ? 'py-2 pl-4 pr-2 sm:pl-5' : 'px-3 py-3.5 sm:px-6 lg:px-10 lg:py-5'
           )}
         >
-          <Logo compact={island} className="shrink-0" />
+          <span aria-hidden className="lg:hidden" />
+          <Logo
+            compact={island}
+            stacked={!island}
+            className="shrink-0 justify-self-center lg:justify-self-start"
+          />
 
           {/* Absolutely centred, so the links hold the middle whatever the logo
               and the button on either side are doing. */}
@@ -109,7 +120,7 @@ export function SiteHeader() {
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="flex size-10 shrink-0 items-center justify-center rounded-full text-ink transition-colors hover:bg-brand-wash hover:text-brand lg:hidden"
+            className="flex size-10 shrink-0 items-center justify-center justify-self-end rounded-full text-ink transition-colors hover:bg-brand-wash hover:text-brand lg:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
