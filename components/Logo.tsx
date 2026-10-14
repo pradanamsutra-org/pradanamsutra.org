@@ -14,8 +14,8 @@ export function LogoMark({ className }: { className?: string }) {
     <Image
       src="/pradanam-mark.png"
       alt=""
-      width={792}
-      height={455}
+      width={1158}
+      height={661}
       priority
       className={cn('h-7 w-auto object-contain', className)}
     />
