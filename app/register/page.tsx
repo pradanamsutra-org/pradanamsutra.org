@@ -11,7 +11,7 @@ export default function RegisterPage() {
       eyebrow="Create an account"
       title={
         <>
-          Keep every meal <em className="font-normal italic text-emerald">in one place.</em>
+          Keep every meal <em className="font-normal italic text-brand">in one place.</em>
         </>
       }
       subtitle="An account is optional. Sign in before you donate and every meal you fund is kept here, with its full journey attached."
@@ -19,13 +19,13 @@ export default function RegisterPage() {
       <RegisterForm />
       <p className="mt-7 text-[13px] text-ink-soft">
         Already have an account?{' '}
-        <Link href="/login" className="text-emerald underline underline-offset-2">
+        <Link href="/login" className="text-brand underline underline-offset-2">
           Sign in
         </Link>
       </p>
       <p className="mt-2 text-[13px] text-ink-soft">
         Signing up for a restaurant or an NGO?{' '}
-        <Link href="/join" className="text-emerald underline underline-offset-2">
+        <Link href="/join" className="text-brand underline underline-offset-2">
           Apply to partner
         </Link>
       </p>

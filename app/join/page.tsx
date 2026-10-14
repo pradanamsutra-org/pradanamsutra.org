@@ -5,9 +5,9 @@ import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 
 export const metadata: Metadata = {
-  title: 'Partner with DaanSetu',
+  title: 'Partner with Pradanam Sutra',
   description:
-    'Restaurants and NGOs can apply to join DaanSetu — a second service for kitchens, and confirmed meals for the organisations that distribute them.',
+    'Restaurants and NGOs can apply to join Pradanam Sutra — a second service for kitchens, and confirmed meals for the organisations that distribute them.',
 };
 
 const OPTIONS = [
@@ -47,16 +47,16 @@ export default function JoinPage() {
         <section className="grain relative overflow-hidden border-b border-line py-14 md:py-20">
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-40 -top-32 size-[32rem] rounded-full bg-emerald-wash blur-3xl"
+            className="pointer-events-none absolute -right-40 -top-32 size-[32rem] rounded-full bg-brand-wash blur-3xl"
           />
           <div className="container-lux relative">
             <p className="eyebrow">Partner with us</p>
             <h1 className="display-lg mt-5 max-w-2xl text-balance-lux">
               A kitchen that can cook one more meal, and{' '}
-              <em className="font-normal italic text-emerald">someone who needs it.</em>
+              <em className="font-normal italic text-brand">someone who needs it.</em>
             </h1>
             <p className="prose-lux mt-6 max-w-xl">
-              DaanSetu keeps the two ends of that honest with each other. Every plate is funded
+              Pradanam Sutra keeps the two ends of that honest with each other. Every plate is funded
               half by a guest and half by the kitchen, and no donation closes until the NGO confirms
               what arrived.
             </p>
@@ -72,7 +72,7 @@ export default function JoinPage() {
                   key={option.href}
                   className="flex flex-col rounded-[22px] border border-line bg-surface p-7 md:p-9"
                 >
-                  <span className="flex size-11 items-center justify-center rounded-full border border-emerald/20 bg-emerald-wash text-emerald">
+                  <span className="flex size-11 items-center justify-center rounded-full border border-brand/20 bg-brand-wash text-brand">
                     <Icon size={18} strokeWidth={1.7} />
                   </span>
                   <p className="eyebrow mt-6">{option.eyebrow}</p>
@@ -82,7 +82,7 @@ export default function JoinPage() {
                   <ul className="mt-6 space-y-3 border-t border-line-soft pt-6">
                     {option.points.map((point) => (
                       <li key={point} className="flex gap-3 text-[13.5px] leading-relaxed text-ink-soft">
-                        <span className="mt-2 size-1 shrink-0 rounded-full bg-emerald" />
+                        <span className="mt-2 size-1 shrink-0 rounded-full bg-brand" />
                         {point}
                       </li>
                     ))}
@@ -102,7 +102,7 @@ export default function JoinPage() {
 
           <p className="mt-10 text-center text-[13px] text-ink-soft">
             Already applied?{' '}
-            <Link href="/login" className="text-emerald underline underline-offset-2">
+            <Link href="/login" className="text-brand underline underline-offset-2">
               Sign in to your workspace
             </Link>
             .

@@ -87,7 +87,7 @@ export default function RestaurantBatchesPage() {
           label="Closed"
           value={summary.byStatus.COMPLETED.batches}
           sub="Counted and confirmed"
-          tone="emerald"
+          tone="brand"
         />
       </div>
 
@@ -181,7 +181,7 @@ function BatchRow({ batch, onDispatch }: { batch: Batch; onDispatch: (b: Batch) 
     <li
       className={cn(
         'rounded-[18px] border bg-surface p-5',
-        flagged ? 'border-amber/30' : batch.status === 'READY_FOR_DELIVERY' ? 'border-brass/30' : 'border-line'
+        flagged ? 'border-amber/30' : batch.status === 'READY_FOR_DELIVERY' ? 'border-accent/30' : 'border-line'
       )}
     >
       <div className="flex flex-wrap items-start justify-between gap-4">
@@ -210,7 +210,7 @@ function BatchRow({ batch, onDispatch }: { batch: Batch; onDispatch: (b: Batch) 
               </div>
               <div className="h-1.5 w-full overflow-hidden rounded-full bg-line-soft">
                 <div
-                  className="h-full rounded-full bg-emerald transition-all duration-700"
+                  className="h-full rounded-full bg-brand transition-all duration-700"
                   style={{ width: `${percent}%` }}
                 />
               </div>
@@ -224,7 +224,7 @@ function BatchRow({ batch, onDispatch }: { batch: Batch; onDispatch: (b: Batch) 
               {batch.receivedAt && (
                 <>
                   {' · '}
-                  <span className={flagged ? 'text-amber' : 'text-emerald'}>
+                  <span className={flagged ? 'text-amber' : 'text-brand'}>
                     {ngo?.name ?? 'The NGO'} counted {batch.receivedQuantity}
                   </span>
                 </>
@@ -236,14 +236,14 @@ function BatchRow({ batch, onDispatch }: { batch: Batch; onDispatch: (b: Batch) 
             <p className="mt-3 flex items-start gap-2 rounded-xl border border-amber/30 bg-amber-tint p-3.5 text-[12.5px] leading-relaxed text-ink-soft">
               <AlertTriangle size={13} className="mt-0.5 shrink-0 text-amber" strokeWidth={1.8} />
               <span>
-                {batch.receiptNote ?? 'The count did not match.'} DaanSetu is reviewing this with
+                {batch.receiptNote ?? 'The count did not match.'} Pradanam Sutra is reviewing this with
                 the NGO.
               </span>
             </p>
           )}
 
           {batch.resolution?.note && (
-            <p className="mt-2.5 border-l-2 border-emerald/40 pl-3.5 text-[12.5px] leading-relaxed text-emerald">
+            <p className="mt-2.5 border-l-2 border-brand/40 pl-3.5 text-[12.5px] leading-relaxed text-brand">
               Resolved: {batch.resolution.note}
             </p>
           )}
@@ -328,8 +328,8 @@ function DispatchDialog({
           </button>
         </div>
 
-        <div className="mt-6 rounded-xl border border-emerald/20 bg-emerald-wash p-5">
-          <p className="numeral text-[2rem] leading-none text-emerald">
+        <div className="mt-6 rounded-xl border border-brand/20 bg-brand-wash p-5">
+          <p className="numeral text-[2rem] leading-none text-brand">
             {batch.collectedQuantity}
           </p>
           <p className="mt-1.5 text-[12.5px] text-ink-soft">

@@ -90,7 +90,7 @@ export default function NgoBatchesPage() {
           label="Confirmed"
           value={summary.byStatus.COMPLETED.batches}
           sub="Closed batches"
-          tone="emerald"
+          tone="brand"
         />
       </div>
 
@@ -203,7 +203,7 @@ function BatchRow({ batch, onConfirm }: { batch: Batch; onConfirm: (b: Batch) =>
 
           {batch.receivedAt && (
             <p className="mt-3 text-[12.5px]">
-              <span className={flagged ? 'text-amber' : 'text-emerald'}>
+              <span className={flagged ? 'text-amber' : 'text-brand'}>
                 You counted {batch.receivedQuantity} of {batch.dispatchedQuantity} sent
               </span>
               <span className="text-ink-mute"> · {formatDate(batch.receivedAt)}</span>
@@ -217,8 +217,8 @@ function BatchRow({ batch, onConfirm }: { batch: Batch; onConfirm: (b: Batch) =>
           )}
 
           {batch.resolution?.note && (
-            <p className="mt-2.5 border-l-2 border-emerald/40 pl-3.5 text-[12.5px] leading-relaxed text-emerald">
-              Resolved by DaanSetu: {batch.resolution.note}
+            <p className="mt-2.5 border-l-2 border-brand/40 pl-3.5 text-[12.5px] leading-relaxed text-brand">
+              Resolved by Pradanam Sutra: {batch.resolution.note}
             </p>
           )}
         </div>

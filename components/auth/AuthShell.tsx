@@ -32,7 +32,7 @@ export function AuthShell({
         </div>
 
         <p className="text-[12px] text-ink-mute">
-          <Link href="/" className="transition-colors hover:text-emerald">
+          <Link href="/" className="transition-colors hover:text-brand">
             ← Back to daansetu.in
           </Link>
         </p>
@@ -48,7 +48,7 @@ export function AuthShell({
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep via-emerald-deep/55 to-emerald-deep/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep via-brand-deep/55 to-brand-deep/25" />
         <div className="absolute inset-x-0 bottom-0 p-14">
           <span className="rule-diamond w-16 text-paper/25" />
           <p className="mt-7 max-w-md font-display text-[1.7rem] italic leading-snug text-paper">

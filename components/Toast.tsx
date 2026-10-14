@@ -57,7 +57,7 @@ function ToastCard({ toast, onClose }: { toast: Toast; onClose: () => void }) {
       <span
         className={cn(
           'mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full',
-          toast.tone === 'error' ? 'bg-danger-tint text-danger' : 'bg-emerald-tint text-emerald'
+          toast.tone === 'error' ? 'bg-danger-tint text-danger' : 'bg-brand-tint text-brand'
         )}
       >
         {toast.tone === 'error' ? <AlertCircle size={12} /> : <Check size={12} strokeWidth={3} />}

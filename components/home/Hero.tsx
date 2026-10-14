@@ -12,14 +12,14 @@ const HERO_SECONDARY =
 
 export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; portions: number }) {
   return (
-    <section className="grain relative overflow-hidden pt-28 md:pt-36">
+    <section id="top" className="grain relative overflow-hidden pt-24 md:pt-28">
       <div
         aria-hidden
-        className="pointer-events-none absolute -right-40 -top-40 size-[38rem] rounded-full bg-emerald-wash blur-3xl md:-right-24"
+        className="pointer-events-none absolute -right-40 -top-40 size-[38rem] rounded-full bg-brand-wash blur-3xl md:-right-24"
       />
 
       <div className="container-lux relative">
-        <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+        <div className="grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           {/* ---------------------------------------------------- copy */}
           <div className="animate-rise">
             <div className="flex items-center gap-3">
@@ -27,19 +27,19 @@ export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; por
               <p className="eyebrow">A shared plate, not a donation box</p>
             </div>
 
-            <h1 className="display-xl mt-7 text-balance-lux text-ink">
+            <h1 className="display-xl mt-6 text-balance-lux text-ink">
               You pay half.
               <br />
-              <em className="font-normal italic text-emerald">The kitchen pays the rest.</em>
+              <em className="font-normal italic text-brand">The kitchen pays the rest.</em>
             </h1>
 
-            <p className="prose-lux mt-7 max-w-lg">
+            <p className="prose-lux mt-6 max-w-lg">
               Scan the code on your table, pick a dish at half its menu price, and the restaurant
               matches your half. Then follow the full plate — confirmed, cooked, handed over, and
               counted by the NGO that served it.
             </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
               <Link href={DONATE_HREF} className="btn btn-primary group w-full sm:w-auto">
                 Donate a dish
                 <ArrowRight
@@ -52,13 +52,13 @@ export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; por
               </Link>
             </div>
 
-            <div className="mt-11 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-line pt-7">
+            <div className="mt-9 flex flex-wrap items-center gap-x-8 gap-y-4 border-t border-line pt-6">
               <div className="flex items-center gap-2.5">
-                <ShieldCheck size={16} className="text-emerald" strokeWidth={1.6} />
+                <ShieldCheck size={16} className="text-brand" strokeWidth={1.6} />
                 <span className="text-[13px] text-ink-soft">Confirmed by the receiving NGO</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <QrCode size={16} className="text-emerald" strokeWidth={1.6} />
+                <QrCode size={16} className="text-brand" strokeWidth={1.6} />
                 <span className="text-[13px] text-ink-soft">No account needed to give</span>
               </div>
             </div>
@@ -66,7 +66,7 @@ export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; por
 
           {/* -------------------------------------------------- visual */}
           <div className="animate-fade relative [animation-delay:250ms]">
-            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border border-line sm:aspect-[5/6] lg:aspect-[4/5]">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[24px] border border-line sm:aspect-[5/6] lg:aspect-auto lg:h-[30rem] xl:h-[33rem]">
               <Image
                 src={HERO_IMAGE}
                 alt="A shared vegetarian meal laid out in steel bowls"
@@ -75,16 +75,16 @@ export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; por
                 sizes="(max-width: 1024px) 100vw, 46vw"
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/50 via-emerald-deep/6 via-50% to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/50 via-brand-deep/6 via-50% to-transparent" />
             </div>
 
             <div className="absolute -bottom-6 -left-2 w-[min(19rem,88%)] rounded-2xl border border-line bg-surface/95 p-4 shadow-[0_28px_70px_-32px_rgba(20,32,26,0.5)] backdrop-blur-sm sm:-left-6 sm:p-5">
               <div className="flex items-center justify-between">
                 <p className="eyebrow">Donation DS-7K2P</p>
-                <span className="flex items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.09em] text-emerald">
+                <span className="flex items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.09em] text-brand">
                   <span className="relative flex size-1.5">
-                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-mid opacity-60" />
-                    <span className="relative inline-flex size-1.5 rounded-full bg-emerald" />
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand-mid opacity-60" />
+                    <span className="relative inline-flex size-1.5 rounded-full bg-brand" />
                   </span>
                   Live
                 </span>
@@ -100,7 +100,7 @@ export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; por
                     <span
                       className={
                         step.done
-                          ? 'size-1.5 rounded-full bg-emerald'
+                          ? 'size-1.5 rounded-full bg-brand'
                           : 'size-1.5 rounded-full border border-ink-faint'
                       }
                     />
@@ -118,7 +118,7 @@ export function Hero({ foodValuePaise, portions }: { foodValuePaise: number; por
           </div>
         </div>
 
-        <div className="mt-24 border-t border-line pt-7 md:mt-32">
+        <div className="mt-14 border-t border-line pt-6 md:mt-20">
           <p className="text-center text-[13px] text-ink-mute">
             <span className="numeral text-[15px] text-ink">{formatInr(foodValuePaise)}</span> of food
             funded to date across{' '}

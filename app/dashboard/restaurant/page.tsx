@@ -87,11 +87,11 @@ export default function RestaurantOverview() {
       />
 
       {/* today, first — this is the number that drives the shift */}
-      <div className="rounded-[18px] border border-emerald/20 bg-emerald-wash p-6">
-        <p className="eyebrow text-emerald">Today</p>
+      <div className="rounded-[18px] border border-brand/20 bg-brand-wash p-6">
+        <p className="eyebrow text-brand">Today</p>
         <div className="mt-4 flex flex-wrap items-end gap-x-10 gap-y-5">
           <div>
-            <p className="numeral text-[2.4rem] leading-none text-emerald">
+            <p className="numeral text-[2.4rem] leading-none text-brand">
               {formatNumber(analytics.today.portions)}
             </p>
             <p className="mt-1.5 text-[11.5px] uppercase tracking-[0.11em] text-ink-mute">
@@ -133,7 +133,7 @@ export default function RestaurantOverview() {
           label="Food funded"
           value={formatInr(analytics.totals.foodValuePaise)}
           sub={`${formatNumber(analytics.totals.portions)} portions paid for, all time`}
-          tone="emerald"
+          tone="brand"
         />
         <StatCard
           label="Ready to cook"
@@ -183,7 +183,7 @@ export default function RestaurantOverview() {
                   </div>
                   <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-line-soft">
                     <div
-                      className="h-full rounded-full bg-emerald transition-all duration-700"
+                      className="h-full rounded-full bg-brand transition-all duration-700"
                       style={{ width: `${(count / total) * 100}%` }}
                     />
                   </div>
@@ -203,7 +203,7 @@ export default function RestaurantOverview() {
                 <span className="numeral w-6 text-[15px] text-ink-faint">{i + 1}</span>
                 <span className="flex-1 text-[14px] text-ink">{item._id}</span>
                 <span className="text-[13px] text-ink-mute">{item.quantity} portions</span>
-                <span className="numeral w-24 text-right text-[14px] text-emerald">
+                <span className="numeral w-24 text-right text-[14px] text-brand">
                   {formatInr(item.foodValuePaise)}
                 </span>
               </li>
@@ -217,7 +217,7 @@ export default function RestaurantOverview() {
           <h2 className="display-sm">Recent donations</h2>
           <Link
             href="/dashboard/restaurant/batches"
-            className="group flex items-center gap-1.5 text-[13px] text-ink-soft transition-colors hover:text-emerald"
+            className="group flex items-center gap-1.5 text-[13px] text-ink-soft transition-colors hover:text-brand"
           >
             See batches
             <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />
@@ -230,7 +230,7 @@ export default function RestaurantOverview() {
               <Link
                 href={`/track/${d.donationId}`}
                 target="_blank"
-                className="flex flex-wrap items-center gap-x-5 gap-y-2 rounded-[14px] border border-line bg-surface p-4 transition-colors hover:border-emerald/30"
+                className="flex flex-wrap items-center gap-x-5 gap-y-2 rounded-[14px] border border-line bg-surface p-4 transition-colors hover:border-brand/30"
               >
                 <span className="numeral text-[13px] tracking-[0.03em] text-ink-mute">
                   {d.donationId}
@@ -241,7 +241,7 @@ export default function RestaurantOverview() {
                 <span className="text-[12.5px] text-ink-mute">
                   {(d.ngo as Ngo | undefined)?.name}
                 </span>
-                <span className="numeral text-[13px] text-emerald">
+                <span className="numeral text-[13px] text-brand">
                   {formatInr(d.totalFoodValuePaise)}
                 </span>
                 <StatusBadge status={d.status} short />

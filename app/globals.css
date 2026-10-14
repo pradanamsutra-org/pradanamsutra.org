@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  /* ---- Palette: warm paper, green-black ink, dark emerald accent ---- */
+  /* ---- Palette: warm paper, green-black ink, dark brand accent ---- */
   --color-paper: #faf8f3;
   --color-paper-deep: #f3efe6;
   --color-paper-warm: #f7f2e9;
@@ -15,14 +15,14 @@
   --color-line: #e5e0d4;
   --color-line-soft: #efebe1;
 
-  --color-emerald: #0d4b38;
-  --color-emerald-deep: #06301f;
-  --color-emerald-mid: #1a7a5a;
-  --color-emerald-tint: #e9f1eb;
-  --color-emerald-wash: #f3f8f4;
+  --color-brand: #0d4b38;
+  --color-brand-deep: #06301f;
+  --color-brand-mid: #1a7a5a;
+  --color-brand-tint: #e9f1eb;
+  --color-brand-wash: #f3f8f4;
 
-  --color-brass: #b08d4f;
-  --color-brass-tint: #f6efe2;
+  --color-accent: #b08d4f;
+  --color-accent-tint: #f6efe2;
 
   --color-danger: #9b3222;
   --color-danger-tint: #fbeeea;
@@ -58,7 +58,7 @@
   }
 
   ::selection {
-    background: var(--color-emerald);
+    background: var(--color-brand);
     color: var(--color-paper);
   }
 
@@ -81,7 +81,7 @@
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-emerald);
+    outline: 2px solid var(--color-brand);
     outline-offset: 3px;
     border-radius: 4px;
   }
@@ -180,11 +180,11 @@
   }
 
   .btn-primary {
-    background: var(--color-emerald);
+    background: var(--color-brand);
     color: #f4f7f4;
   }
   .btn-primary:hover:not(:disabled) {
-    background: var(--color-emerald-deep);
+    background: var(--color-brand-deep);
     transform: translateY(-1px);
   }
   .btn-primary:active:not(:disabled) {
@@ -201,9 +201,9 @@
     border: 1px solid var(--color-line);
   }
   .btn-outline:hover:not(:disabled) {
-    border-color: var(--color-emerald);
-    color: var(--color-emerald);
-    background: var(--color-emerald-wash);
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+    background: var(--color-brand-wash);
   }
 
   .btn-ghost {
@@ -211,8 +211,8 @@
     color: var(--color-ink-soft);
   }
   .btn-ghost:hover:not(:disabled) {
-    color: var(--color-emerald);
-    background: var(--color-emerald-wash);
+    color: var(--color-brand);
+    background: var(--color-brand-wash);
   }
 
   .field {
@@ -230,7 +230,7 @@
   }
   .field:focus {
     outline: none;
-    border-color: var(--color-emerald);
+    border-color: var(--color-brand);
     box-shadow: 0 0 0 3px rgba(13, 75, 56, 0.08);
   }
 
@@ -261,15 +261,26 @@
 }
 
 @layer utilities {
+  /*
+   * The page is meant to feel wide on a desktop: a near-full-bleed canvas with
+   * only enough gutter to keep content off the window edge. Individual blocks
+   * (prose, forms) set their own max-width, so widening here does not stretch
+   * any single column of text past a readable measure.
+   */
   .container-lux {
     width: 100%;
     margin-inline: auto;
     padding-inline: 1.25rem;
-    max-width: 76rem;
+    max-width: 96rem;
   }
   @media (min-width: 768px) {
     .container-lux {
-      padding-inline: 2.5rem;
+      padding-inline: 2rem;
+    }
+  }
+  @media (min-width: 1536px) {
+    .container-lux {
+      padding-inline: 2.75rem;
     }
   }
 
@@ -356,9 +367,9 @@
   animation: live-pulse 2.2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
-/* On paper the bright core is too light — sit it on the deeper emerald. */
+/* On paper the bright core is too light — sit it on the deeper brand. */
 .live-dot-on-light {
-  --live-core: var(--color-emerald-mid);
+  --live-core: var(--color-brand-mid);
   --live-ring: rgba(26, 122, 90, 0.4);
   --live-glow: rgba(26, 122, 90, 0.6);
 }

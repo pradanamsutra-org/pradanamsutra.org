@@ -267,7 +267,7 @@ export function PartnerForm({ kind }: { kind: Kind }) {
           )}
         </button>
         <p className="mt-3 text-center text-[12px] leading-relaxed text-ink-mute">
-          You can sign in and set everything up straight away. DaanSetu reviews every application
+          You can sign in and set everything up straight away. Pradanam Sutra reviews every application
           before your page goes live.
         </p>
       </div>

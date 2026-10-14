@@ -32,7 +32,7 @@ export function PartnerNgo({ ngo }: { ngo: Ngo }) {
               ].map(([label, value]) => (
                 <div key={label}>
                   <dt className="text-[10.5px] uppercase tracking-[0.12em] text-ink-mute">{label}</dt>
-                  <dd className="numeral mt-2 text-[2rem] leading-none text-emerald">{value}</dd>
+                  <dd className="numeral mt-2 text-[2rem] leading-none text-brand">{value}</dd>
                 </div>
               ))}
             </dl>

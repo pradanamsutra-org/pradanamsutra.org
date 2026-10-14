@@ -31,7 +31,7 @@ export function PriceSplit({
         </span>
         <span
           className={cn(
-            'numeral leading-none text-emerald',
+            'numeral leading-none text-brand',
             size === 'sm' ? 'text-[1.25rem]' : 'text-[1.6rem]'
           )}
         >

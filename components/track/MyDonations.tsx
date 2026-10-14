@@ -2,25 +2,18 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { ArrowRight, Loader2, UtensilsCrossed } from 'lucide-react';
+import { Loader2, UtensilsCrossed } from 'lucide-react';
 import { get } from '@/lib/api';
 import { useAuth } from '@/lib/auth-context';
-import { StatusBadge } from '@/components/StatusBadge';
 import { LoadError } from '@/components/dashboard/LoadError';
-import { formatInr, formatNumber, formatDate } from '@/lib/utils';
-import type { Donation, Restaurant } from '@/lib/types';
+import { formatInr, formatNumber } from '@/lib/utils';
+import type { Donation } from '@/lib/types';
 import { DONATE_HREF } from '@/lib/config';
+import { DonationRow, type DonationTotals } from './DonationRow';
 
 interface Data {
   donations: Donation[];
-  totals: {
-    portions: number;
-    customerPaidPaise: number;
-    foodValuePaise: number;
-    count: number;
-    completed: number;
-  };
+  totals: DonationTotals;
 }
 
 export function MyDonations() {
@@ -56,13 +49,13 @@ export function MyDonations() {
       <section className="grain relative overflow-hidden border-b border-line py-12 md:py-16">
         <div
           aria-hidden
-          className="pointer-events-none absolute -right-40 -top-24 size-[30rem] rounded-full bg-emerald-wash blur-3xl"
+          className="pointer-events-none absolute -right-40 -top-24 size-[30rem] rounded-full bg-brand-wash blur-3xl"
         />
         <div className="container-lux relative">
           <p className="eyebrow">Your record</p>
           <h1 className="display-lg mt-5 max-w-2xl text-balance-lux">
             {user?.name?.split(' ')[0]}, you have sent out{' '}
-            <em className="font-normal italic text-emerald">
+            <em className="font-normal italic text-brand">
               {formatInr(data.totals.foodValuePaise)} of food.
             </em>
           </h1>
@@ -99,59 +92,11 @@ export function MyDonations() {
           <>
             <h2 className="display-sm">Every donation, in order</h2>
             <ul className="mt-8 space-y-3">
-              {data.donations.map((d) => {
-                const restaurant = d.restaurant as Restaurant;
-                return (
-                  <li key={d._id}>
-                    <Link
-                      href={`/track/${d.donationId}`}
-                      className="group flex flex-col gap-4 rounded-[18px] border border-line bg-surface p-4 transition-colors duration-500 hover:border-emerald/30 sm:flex-row sm:items-center sm:gap-5 sm:p-5"
-                    >
-                      {d.items[0]?.image && (
-                        <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-xl sm:size-[72px]">
-                          <Image
-                            src={d.items[0].image}
-                            alt={d.items[0].name}
-                            fill
-                            sizes="(max-width: 640px) 100vw, 72px"
-                            className="object-cover"
-                          />
-                        </div>
-                      )}
-
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2.5">
-                          <span className="numeral text-[13px] tracking-[0.03em] text-ink-mute">
-                            {d.donationId}
-                          </span>
-                          <StatusBadge status={d.status} short />
-                        </div>
-                        <p className="mt-1.5 font-display text-[1.1rem] font-medium tracking-[-0.015em] text-ink">
-                          {d.items.map((i) => `${i.quantity}× ${i.name}`).join(', ')}
-                        </p>
-                        <p className="mt-1 text-[12.5px] text-ink-mute">
-                          {restaurant?.name} · {formatDate(d.createdAt)}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center justify-between gap-5 sm:justify-end">
-                        <div className="text-right">
-                          <p className="numeral text-[1.25rem] leading-none text-emerald">
-                            {formatInr(d.totalFoodValuePaise)}
-                          </p>
-                          <p className="mt-1 text-[11.5px] text-ink-mute">
-                            you paid {formatInr(d.customerPaidPaise)}
-                          </p>
-                        </div>
-                        <ArrowRight
-                          size={16}
-                          className="shrink-0 text-ink-faint transition-all duration-500 group-hover:translate-x-1 group-hover:text-emerald"
-                        />
-                      </div>
-                    </Link>
-                  </li>
-                );
-              })}
+              {data.donations.map((d) => (
+                <li key={d._id}>
+                  <DonationRow donation={d} />
+                </li>
+              ))}
             </ul>
           </>
         )}

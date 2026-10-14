@@ -1,7 +1,6 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Loader2, ArrowRight } from 'lucide-react';
 import { useAuth, homeForRole } from '@/lib/auth-context';
@@ -97,13 +96,6 @@ export function LoginForm() {
         </button>
       </form>
 
-      <p className="mt-6 text-[13px] text-ink-soft">
-        New here?{' '}
-        <Link href="/register" className="text-emerald underline underline-offset-2">
-          Create an account
-        </Link>
-      </p>
-
       {SHOW_DEMO && (
       <div className="mt-8 rounded-xl border border-line bg-paper-deep p-4">
         <p className="text-[10.5px] uppercase tracking-[0.13em] text-ink-mute">Demo accounts</p>
@@ -113,7 +105,7 @@ export function LoginForm() {
               key={d.email}
               type="button"
               onClick={() => setForm({ email: d.email, password: DEMO_PASSWORD })}
-              className="rounded-full border border-line bg-surface px-3 py-1.5 text-[12px] text-ink-soft transition-colors hover:border-emerald/40 hover:text-emerald"
+              className="rounded-full border border-line bg-surface px-3 py-1.5 text-[12px] text-ink-soft transition-colors hover:border-brand/40 hover:text-brand"
             >
               {d.label}
             </button>

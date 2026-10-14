@@ -12,9 +12,9 @@ function VegMark() {
   return (
     <span
       title="Vegetarian"
-      className="inline-flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-emerald-mid"
+      className="inline-flex size-3.5 shrink-0 items-center justify-center rounded-[3px] border border-brand-mid"
     >
-      <span className="size-1.5 rounded-full bg-emerald-mid" />
+      <span className="size-1.5 rounded-full bg-brand-mid" />
     </span>
   );
 }
@@ -30,7 +30,7 @@ interface Props {
 /** Large editorial card for the kitchen's signature dishes. */
 export function SignatureDishCard({ item, quantity, onChange, restaurantName, activeBatch }: Props) {
   return (
-    <article className="group overflow-hidden rounded-[20px] border border-line bg-surface transition-colors duration-500 hover:border-emerald/25">
+    <article className="group overflow-hidden rounded-[20px] border border-line bg-surface transition-colors duration-500 hover:border-brand/25">
       <div className="relative aspect-[16/10] overflow-hidden">
         <Image
           src={item.image || FALLBACK}
@@ -39,8 +39,8 @@ export function SignatureDishCard({ item, quantity, onChange, restaurantName, ac
           sizes="(max-width: 768px) 100vw, 46vw"
           className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/40 via-transparent to-transparent" />
-        <span className="absolute left-4 top-4 rounded-full bg-paper/92 px-3 py-1 text-[10.5px] font-medium uppercase tracking-[0.1em] text-emerald backdrop-blur">
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/40 via-transparent to-transparent" />
+        <span className="absolute left-4 top-4 rounded-full bg-paper/92 px-3 py-1 text-[10.5px] font-medium uppercase tracking-[0.1em] text-brand backdrop-blur">
           {100 - item.customerSharePercent}% matched
         </span>
       </div>
@@ -71,7 +71,7 @@ export function SignatureDishCard({ item, quantity, onChange, restaurantName, ac
             </div>
             <div className="h-1 w-full overflow-hidden rounded-full bg-line/60">
               <div
-                className="h-full rounded-full bg-emerald transition-all duration-1000"
+                className="h-full rounded-full bg-brand transition-all duration-1000"
                 style={{ width: `${Math.min(100, Math.round((activeBatch.collectedQuantity / activeBatch.targetQuantity) * 100))}%` }}
               />
             </div>
@@ -94,7 +94,7 @@ export function SignatureDishCard({ item, quantity, onChange, restaurantName, ac
 /** Compact row for the rest of the menu. */
 export function CompactDishCard({ item, quantity, onChange, restaurantName, activeBatch }: Props) {
   return (
-    <article className="group flex gap-4 rounded-[18px] border border-line bg-surface p-3.5 transition-colors duration-500 hover:border-emerald/25 sm:gap-5 sm:p-4">
+    <article className="group flex gap-4 rounded-[18px] border border-line bg-surface p-3.5 transition-colors duration-500 hover:border-brand/25 sm:gap-5 sm:p-4">
       <div className="relative size-[92px] shrink-0 overflow-hidden rounded-[13px] sm:size-[110px]">
         <Image
           src={item.image || FALLBACK}
@@ -131,7 +131,7 @@ export function CompactDishCard({ item, quantity, onChange, restaurantName, acti
             </div>
             <div className="h-1 w-3/4 max-w-[12rem] overflow-hidden rounded-full bg-line/60">
               <div
-                className="h-full rounded-full bg-emerald transition-all duration-1000"
+                className="h-full rounded-full bg-brand transition-all duration-1000"
                 style={{ width: `${Math.min(100, Math.round((activeBatch.collectedQuantity / activeBatch.targetQuantity) * 100))}%` }}
               />
             </div>

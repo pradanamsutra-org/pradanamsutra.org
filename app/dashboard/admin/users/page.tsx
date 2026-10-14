@@ -29,9 +29,9 @@ const ROLES: { value: string; label: string }[] = [
 ];
 
 const ROLE_TONE: Record<Role, string> = {
-  admin: 'border-emerald bg-emerald text-paper',
-  restaurant: 'border-brass/30 bg-brass-tint text-brass',
-  ngo: 'border-emerald/25 bg-emerald-wash text-emerald',
+  admin: 'border-brand bg-brand text-paper',
+  restaurant: 'border-accent/30 bg-accent-tint text-accent',
+  ngo: 'border-brand/25 bg-brand-wash text-brand',
   customer: 'border-line bg-paper text-ink-mute',
 };
 
@@ -87,8 +87,8 @@ export default function AdminUsersPage() {
               className={cn(
                 'shrink-0 rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-300',
                 role === r.value
-                  ? 'border-emerald bg-emerald text-paper'
-                  : 'border-line bg-surface text-ink-soft hover:border-emerald/40 hover:text-emerald'
+                  ? 'border-brand bg-brand text-paper'
+                  : 'border-line bg-surface text-ink-soft hover:border-brand/40 hover:text-brand'
               )}
             >
               {r.label}

@@ -1,28 +1,30 @@
 import Link from 'next/link';
-import { LogoMark } from './Logo';
+import { LogoMark, BRAND_NAME } from './Logo';
 
 /**
- * Deliberately short. Sign-in routes are reachable from the header, and the
- * donation menu is reached by scanning a restaurant's code — not from here,
- * so the footer stays correct as more kitchens are onboarded.
+ * Deliberately short. The donation menu is reached by scanning a restaurant's
+ * code — not from here — so the footer stays correct as more kitchens are
+ * onboarded. Signing in lives down here rather than in the header: only
+ * kitchens, NGOs and admins have accounts, and a guest never needs one.
  */
 const LINKS = [
   { href: '/#how', label: 'How it works' },
   { href: '/#transparency', label: 'Transparency promise' },
   { href: '/track', label: 'Track a donation' },
   { href: '/join', label: 'Partner with us' },
+  { href: '/login', label: 'Partner sign in' },
 ];
 
 export function SiteFooter() {
   return (
-    <footer className="bg-emerald-deep text-paper/70">
+    <footer className="bg-brand-deep text-paper/70">
       <div className="container-lux py-14 md:py-16">
         <div className="flex flex-col gap-10 md:flex-row md:items-start md:justify-between md:gap-16">
           <div className="max-w-xs">
             <div className="flex items-center gap-2 text-paper">
-              <LogoMark className="size-6 brightness-0 invert" />
-              <span className="font-display text-[1.15rem] font-medium tracking-[-0.02em]">
-                DaanSetu
+              <LogoMark className="h-7 w-auto" />
+              <span className="text-[13px] font-semibold uppercase tracking-[0.16em] text-paper">
+                {BRAND_NAME}
               </span>
             </div>
             <p className="mt-5 text-[13.5px] leading-relaxed text-paper/55">
@@ -49,9 +51,9 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-paper/12 pt-7 text-[12px] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} DaanSetu · daansetu.in</p>
+          <p>© {new Date().getFullYear()} Pradanam Sutra · daansetu.in</p>
           <p className="flex items-center gap-2">
-            <span className="size-1.5 rounded-full bg-emerald-mid" />
+            <span className="size-1.5 rounded-full bg-brand-mid" />
             100% of every donation reaches the kitchen.
           </p>
         </div>

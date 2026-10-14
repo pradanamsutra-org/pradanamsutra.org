@@ -66,8 +66,8 @@ export default function AdminBatchesPage() {
             className={cn(
               'shrink-0 rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-300',
               filter === f.value
-                ? 'border-emerald bg-emerald text-paper'
-                : 'border-line bg-surface text-ink-soft hover:border-emerald/40 hover:text-emerald'
+                ? 'border-brand bg-brand text-paper'
+                : 'border-line bg-surface text-ink-soft hover:border-brand/40 hover:text-brand'
             )}
           >
             {f.label}
@@ -136,7 +136,7 @@ export default function AdminBatchesPage() {
                       </p>
                     )}
                     {d.resolution?.note && (
-                      <p className="mt-2 border-l-2 border-emerald/40 pl-3.5 text-[12.5px] leading-relaxed text-emerald">
+                      <p className="mt-2 border-l-2 border-brand/40 pl-3.5 text-[12.5px] leading-relaxed text-brand">
                         Resolved: {d.resolution.note}
                       </p>
                     )}
@@ -159,7 +159,7 @@ export default function AdminBatchesPage() {
                   )}
                   <button
                     onClick={() => setExpanded(expanded === d.batchId ? null : d.batchId)}
-                    className="ml-auto flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-emerald"
+                    className="ml-auto flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-brand"
                   >
                     {expanded === d.batchId ? 'Hide detail' : 'Batch detail'}
                     <ChevronDown
@@ -334,7 +334,7 @@ function BatchDetailPanel({ batchId }: { batchId: string }) {
               <Link
                 href={`/track/${d.donationId}`}
                 target="_blank"
-                className="numeral text-ink-soft underline decoration-line underline-offset-2 hover:text-emerald"
+                className="numeral text-ink-soft underline decoration-line underline-offset-2 hover:text-brand"
               >
                 {d.donationId}
               </Link>

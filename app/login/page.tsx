@@ -12,21 +12,25 @@ export default function LoginPage() {
       eyebrow="Welcome back"
       title={
         <>
-          Sign in to <em className="font-normal italic text-emerald">DaanSetu.</em>
+          Sign in to <em className="font-normal italic text-brand">Pradanam Sutra.</em>
         </>
       }
-      subtitle="Restaurants, NGOs and donors all sign in here — you land in the right place automatically."
+      subtitle="For partner kitchens, NGOs and admins — you land in the right place automatically."
     >
       <Suspense fallback={<div className="h-72" />}>
         <LoginForm />
       </Suspense>
       <p className="mt-7 text-[13px] text-ink-soft">
-        Donating for the first time? You don&rsquo;t need an account — just scan the code at a
-        partner restaurant.
+        Donating? You never need an account — scan the code at a partner restaurant, and read
+        your donations back any time on{' '}
+        <Link href="/track" className="text-brand underline underline-offset-2">
+          the tracking page
+        </Link>
+        .
       </p>
       <p className="mt-2 text-[13px] text-ink-soft">
         Run a kitchen or an NGO?{' '}
-        <Link href="/join" className="text-emerald underline underline-offset-2">
+        <Link href="/join" className="text-brand underline underline-offset-2">
           Apply to join
         </Link>
         .

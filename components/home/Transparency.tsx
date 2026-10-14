@@ -3,10 +3,10 @@ import { DONATION_STATUSES, STATUS_META, STATUS_ACTOR_LABEL } from '@/lib/types'
 
 export function Transparency() {
   return (
-    <section id="transparency" className="relative overflow-hidden bg-emerald-deep py-24 text-paper md:py-32">
+    <section id="transparency" className="relative overflow-hidden bg-brand-deep py-24 text-paper md:py-32">
       <div
         aria-hidden
-        className="pointer-events-none absolute -left-52 top-1/3 size-[36rem] rounded-full bg-emerald-mid/12 blur-3xl"
+        className="pointer-events-none absolute -left-52 top-1/3 size-[36rem] rounded-full bg-brand-mid/12 blur-3xl"
       />
 
       <div className="container-lux relative">
@@ -15,7 +15,7 @@ export function Transparency() {
             <p className="eyebrow text-paper/40">The transparency promise</p>
             <h2 className="display-lg mt-5 text-paper text-balance-lux">
               A donation nobody can
-              <em className="font-normal italic text-emerald-mid"> quietly lose.</em>
+              <em className="font-normal italic text-brand-mid"> quietly lose.</em>
             </h2>
             <p className="mt-7 max-w-md text-[15px] leading-relaxed text-paper/60">
               Status can only move forward, one step at a time, and each step is signed by the role
@@ -31,7 +31,7 @@ export function Transparency() {
                 ['No silent shortfalls', 'A mismatch between portions sent and received raises a flag.'],
               ].map(([title, body]) => (
                 <div key={title} className="flex gap-4">
-                  <span className="mt-2 size-1 shrink-0 rounded-full bg-emerald-mid" />
+                  <span className="mt-2 size-1 shrink-0 rounded-full bg-brand-mid" />
                   <div>
                     <p className="text-[14px] font-medium text-paper">{title}</p>
                     <p className="mt-1 text-[13px] leading-relaxed text-paper/50">{body}</p>
@@ -45,11 +45,11 @@ export function Transparency() {
             <ol className="relative">
               <span
                 aria-hidden
-                className="absolute bottom-6 left-[13px] top-3 w-px origin-top bg-gradient-to-b from-emerald-mid via-emerald-mid/40 to-transparent"
+                className="absolute bottom-6 left-[13px] top-3 w-px origin-top bg-gradient-to-b from-brand-mid via-brand-mid/40 to-transparent"
               />
               {DONATION_STATUSES.map((status, i) => (
                 <li key={status} className="relative flex gap-6 pb-9 last:pb-0">
-                  <span className="relative z-10 mt-1 flex size-[27px] shrink-0 items-center justify-center rounded-full border border-paper/20 bg-emerald-deep">
+                  <span className="relative z-10 mt-1 flex size-[27px] shrink-0 items-center justify-center rounded-full border border-paper/20 bg-brand-deep">
                     <span className="numeral text-[11px] text-paper/60">{i + 1}</span>
                   </span>
                   <div className="pt-0.5">
@@ -57,7 +57,7 @@ export function Transparency() {
                       <h3 className="font-display text-[1.3rem] font-normal tracking-[-0.02em] text-paper">
                         {STATUS_META[status].label}
                       </h3>
-                      <span className="text-[10.5px] uppercase tracking-[0.14em] text-emerald-mid">
+                      <span className="text-[10.5px] uppercase tracking-[0.14em] text-brand-mid">
                         {STATUS_ACTOR_LABEL[status]}
                       </span>
                     </div>

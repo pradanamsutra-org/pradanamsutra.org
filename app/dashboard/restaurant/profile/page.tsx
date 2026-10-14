@@ -181,12 +181,12 @@ export default function ProfilePage() {
           <button
             type="button"
             onClick={() => setAccepting((v) => !v)}
-            className="mt-5 flex w-full items-start gap-3.5 rounded-xl border border-line bg-paper p-4 text-left transition-colors hover:border-emerald/35"
+            className="mt-5 flex w-full items-start gap-3.5 rounded-xl border border-line bg-paper p-4 text-left transition-colors hover:border-brand/35"
           >
             <span
               className={cn(
                 'mt-0.5 flex size-[18px] shrink-0 items-center justify-center rounded-[5px] border transition-all',
-                accepting ? 'border-emerald bg-emerald' : 'border-ink-faint bg-surface'
+                accepting ? 'border-brand bg-brand' : 'border-ink-faint bg-surface'
               )}
             >
               {accepting && <Check size={11} className="text-paper" strokeWidth={3} />}
@@ -209,7 +209,7 @@ export default function ProfilePage() {
             </div>
             <div>
               <dt className="text-ink-mute">Approval status</dt>
-              <dd className="mt-1 capitalize text-emerald">{restaurant.approvalStatus}</dd>
+              <dd className="mt-1 capitalize text-brand">{restaurant.approvalStatus}</dd>
             </div>
           </dl>
         </div>

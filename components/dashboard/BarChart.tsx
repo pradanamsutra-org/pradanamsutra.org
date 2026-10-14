@@ -36,7 +36,7 @@ export function BarChart({
         {data.map((d, i) => (
           <div key={`${d.label}-${i}`} className="group relative flex flex-1 flex-col justify-end">
             <div
-              className="w-full rounded-t-[3px] bg-emerald/18 transition-colors duration-300 group-hover:bg-emerald"
+              className="w-full rounded-t-[3px] bg-brand/18 transition-colors duration-300 group-hover:bg-brand"
               style={{ height: `${Math.max((d.value / max) * 100, d.value > 0 ? 4 : 1.5)}%` }}
             />
             <div className="pointer-events-none absolute bottom-full left-1/2 z-10 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg border border-line bg-surface px-2.5 py-1.5 text-[11px] shadow-sm group-hover:block">

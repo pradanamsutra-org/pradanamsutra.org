@@ -7,7 +7,7 @@ export default function NotFound() {
     <div className="grain relative flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 text-center">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 size-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-wash blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 size-[34rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-wash blur-3xl"
       />
       <div className="relative">
         <Logo />

@@ -98,7 +98,7 @@ export default function NgoOverview() {
           label="Portions received"
           value={formatNumber(summary.portionsReceived)}
           sub={`of ${formatNumber(summary.portionsDispatched)} dispatched to you`}
-          tone="emerald"
+          tone="brand"
         />
       </div>
 
@@ -110,7 +110,7 @@ export default function NgoOverview() {
               {flagged.length} {pluralize(flagged.length, 'batch', 'batches')} under review
             </p>
             <p className="mt-1 text-[13px] text-ink-soft">
-              You recorded a different count than was sent. DaanSetu is taking it up with the
+              You recorded a different count than was sent. Pradanam Sutra is taking it up with the
               kitchen — nothing more is needed from you.
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function NgoOverview() {
           </div>
           <Link
             href="/dashboard/ngo/batches"
-            className="group flex shrink-0 items-center gap-1.5 text-[13px] text-ink-soft transition-colors hover:text-emerald"
+            className="group flex shrink-0 items-center gap-1.5 text-[13px] text-ink-soft transition-colors hover:text-brand"
           >
             All food
             <ArrowRight size={13} className="transition-transform group-hover:translate-x-1" />

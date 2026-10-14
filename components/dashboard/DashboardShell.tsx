@@ -54,8 +54,8 @@ export function DashboardShell({
             className={cn(
               'group flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-[13.5px] transition-all duration-300',
               active
-                ? 'bg-emerald text-paper'
-                : 'text-ink-soft hover:bg-emerald-wash hover:text-emerald'
+                ? 'bg-brand text-paper'
+                : 'text-ink-soft hover:bg-brand-wash hover:text-brand'
             )}
           >
             <Icon size={16} strokeWidth={1.7} className="shrink-0" />
@@ -89,7 +89,7 @@ export function DashboardShell({
             <Link
               href={publicLink.href}
               target="_blank"
-              className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-[13px] text-ink-soft transition-colors hover:text-emerald"
+              className="flex items-center gap-3 rounded-xl px-3.5 py-2.5 text-[13px] text-ink-soft transition-colors hover:text-brand"
             >
               <ExternalLink size={15} strokeWidth={1.7} />
               {publicLink.label}
@@ -108,7 +108,7 @@ export function DashboardShell({
       {/* -------------------------------------------------- mobile bar */}
       <header className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-line bg-paper/90 px-5 backdrop-blur-xl lg:hidden">
         <Link href="/" className="flex items-center gap-2.5">
-          <LogoMark className="size-6 text-emerald" />
+          <LogoMark className="h-6 w-auto" />
           <span className="font-display text-[15px] font-medium tracking-[-0.02em]">
             {workspace}
           </span>
@@ -189,14 +189,14 @@ export function StatCard({
   label: string;
   value: string | number;
   sub?: string;
-  tone?: 'default' | 'emerald' | 'amber';
+  tone?: 'default' | 'brand' | 'amber';
 }) {
   return (
     <div
       className={cn(
         'rounded-[16px] border p-5',
-        tone === 'emerald'
-          ? 'border-emerald/20 bg-emerald-wash'
+        tone === 'brand'
+          ? 'border-brand/20 bg-brand-wash'
           : tone === 'amber'
             ? 'border-amber/25 bg-amber-tint'
             : 'border-line bg-surface'
@@ -206,7 +206,7 @@ export function StatCard({
       <p
         className={cn(
           'numeral mt-2.5 text-[2rem] leading-none',
-          tone === 'emerald' ? 'text-emerald' : tone === 'amber' ? 'text-amber' : 'text-ink'
+          tone === 'brand' ? 'text-brand' : tone === 'amber' ? 'text-amber' : 'text-ink'
         )}
       >
         {value}

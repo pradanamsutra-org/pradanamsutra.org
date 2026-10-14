@@ -22,13 +22,13 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL('https://daansetu.in'),
   title: {
-    default: 'DaanSetu — A meal, traced from your hand to theirs',
-    template: '%s · DaanSetu',
+    default: 'Pradanam Sutra — A meal, traced from your hand to theirs',
+    template: '%s · Pradanam Sutra',
   },
   description:
     'Scan a restaurant’s code, fund a meal, and follow it through every step until an NGO confirms it was received. Transparent meal donation across India.',
   openGraph: {
-    title: 'DaanSetu — A meal, traced from your hand to theirs',
+    title: 'Pradanam Sutra — A meal, traced from your hand to theirs',
     description:
       'Fund a meal at your favourite restaurant and follow it through every step until it is served.',
     type: 'website',

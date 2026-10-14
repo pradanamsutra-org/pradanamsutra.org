@@ -3,7 +3,7 @@ import { DONATION_STATUSES, statusMeta, type DonationEvent } from '@/lib/types';
 import { formatDate, formatTime, cn, TIME_ZONE_LABEL } from '@/lib/utils';
 
 const ROLE_LABEL: Record<string, string> = {
-  system: 'DaanSetu',
+  system: 'Pradanam Sutra',
   customer: 'Donor',
   restaurant: 'Restaurant',
   ngo: 'NGO',
@@ -48,7 +48,7 @@ export function Timeline({
                 className={cn(
                   'absolute left-[15px] top-8 w-px',
                   'bottom-0',
-                  i < currentIdx ? 'bg-emerald/35' : 'bg-line'
+                  i < currentIdx ? 'bg-brand/35' : 'bg-line'
                 )}
               />
             )}
@@ -60,7 +60,7 @@ export function Timeline({
                 isFlaggedStep
                   ? 'border-amber/40 bg-amber-tint text-amber'
                   : done
-                    ? 'border-emerald bg-emerald text-paper'
+                    ? 'border-brand bg-brand text-paper'
                     : 'border-line bg-surface text-ink-faint'
               )}
             >
@@ -72,7 +72,7 @@ export function Timeline({
                 <span className="size-1.5 rounded-full bg-current" />
               )}
               {active && !isLast && (
-                <span className="absolute inset-0 animate-ping rounded-full border border-emerald opacity-40" />
+                <span className="absolute inset-0 animate-ping rounded-full border border-brand opacity-40" />
               )}
             </span>
 

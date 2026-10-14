@@ -4,13 +4,21 @@ import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { ArrowRight, ExternalLink, MapPin, ShieldCheck, Quote } from 'lucide-react';
+import { motion } from 'motion/react';
+import {
+  ArrowRight,
+  ExternalLink,
+  MapPin,
+  ShieldCheck,
+  Quote,
+} from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
 import { CountUp } from '@/components/CountUp';
 import { SignatureDishCard, CompactDishCard } from './DishCard';
 import { saveCart, cartTotals, type CartLine } from '@/lib/cart';
+import { useHeaderScroll, EASE_EXPO } from '@/lib/use-header-scroll';
 import { formatInr, formatNumber, displayDomain, cn } from '@/lib/utils';
 import type { MenuItem, Restaurant, Ngo } from '@/lib/types';
 
@@ -36,6 +44,7 @@ interface Props {
 
 export function RestaurantView({ restaurant, items, partners, activeBatches, recentDonations }: Props) {
   const router = useRouter();
+  const { island: headerIsland, hidden: headerHidden } = useHeaderScroll();
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [category, setCategory] = useState('All');
 
@@ -82,67 +91,137 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-line/60 bg-paper/80 backdrop-blur-xl">
-        <div className="container-lux flex h-14 items-center justify-between md:h-16">
-          <Logo />
-          <Link
-            href="/track"
-            className="text-[13.5px] tracking-[-0.022em] text-ink-soft transition-colors hover:text-emerald"
+      {/*
+        The same behaviour as the main site header — contracts into a pill past
+        the top, and slides away as you read down the page — but kept to the two
+        things this screen needs: the mark, and a way to track a donation.
+      */}
+      <motion.header
+        animate={{ y: headerHidden ? '-130%' : 0 }}
+        transition={{ duration: 0.5, ease: EASE_EXPO }}
+        className="fixed inset-x-0 top-0 z-40 px-3 sm:px-4"
+      >
+        <div
+          className={cn(
+            'mx-auto transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]',
+            headerIsland
+              ? 'mt-3 max-w-[1120px] rounded-[2rem] bg-paper/70 shadow-[0_12px_40px_-20px_rgba(10,20,40,0.35)] ring-1 ring-ink/10 backdrop-blur-xl'
+              : 'mt-0 max-w-[1600px] rounded-[0px] bg-paper/80 backdrop-blur-xl'
+          )}
+        >
+          <div
+            className={cn(
+              'flex items-center justify-between transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]',
+              headerIsland ? 'py-2 pl-4 pr-4 sm:pl-5' : 'px-3 py-3.5 sm:px-6 lg:px-10'
+            )}
           >
-            Track Donation
-          </Link>
+            <Logo compact={headerIsland} />
+            <Link
+              href="/track"
+              className="text-[13.5px] tracking-[-0.022em] text-ink-soft transition-colors hover:text-brand"
+            >
+              Track Donation
+            </Link>
+          </div>
         </div>
-      </header>
+      </motion.header>
 
-      <main className={cn(lines.length > 0 && 'pb-36')}>
+      <main className={cn('pt-14 md:pt-16', lines.length > 0 && 'pb-36')}>
         {/* ------------------------------------------------------- cover */}
-        <section className="relative h-[62vw] max-h-[26rem] min-h-[15rem] w-full overflow-hidden">
-          <Image
-            src={
-              restaurant.coverImage ??
-              'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85'
-            }
-            alt={restaurant.name}
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
-          {/* Scrim weighted to the bottom, where the name and address sit —
-              the top of the photo stays readable. */}
-          <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/88 via-emerald-deep/28 via-42% to-transparent" />
+        {/* Held inside the container and rounded, rather than bled to the
+            window edge: at desktop widths a full-bleed band crops a landscape
+            photo down to a letterbox strip and slides its top under the
+            translucent header. */}
+        <section id="top" className="container-lux pt-3 md:pt-5">
+          <div className="relative h-[46vw] max-h-[23rem] min-h-[13.5rem] w-full overflow-hidden rounded-[20px] md:rounded-[24px]">
+            <Image
+              src={
+                restaurant.coverImage ??
+                'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85'
+              }
+              alt={restaurant.name}
+              fill
+              priority
+              sizes="(max-width: 1536px) 100vw, 1536px"
+              /* Weighted below centre so the tables and lights stay in frame
+                 when the crop gets wide. */
+              className="object-cover object-[center_58%]"
+            />
+            {/* Scrim weighted to the bottom, where the name and address sit —
+                the top of the photo stays readable. */}
+            <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/85 via-brand-deep/20 via-45% to-transparent" />
 
-          <div className="container-lux absolute inset-x-0 bottom-0 pb-6 md:pb-9">
-            <div className="flex flex-wrap items-center gap-2">
-              <span className="rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm">
-                DaanSetu partner
-              </span>
-              {restaurant.isAcceptingDonations && (
-                <span className="flex items-center gap-1.5 rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm">
-                  <span className="live-dot" />
-                  Accepting donations
+            <div className="absolute inset-x-0 bottom-0 p-5 md:p-8">
+              <div className="flex flex-wrap items-center gap-2">
+                <span className="rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm">
+                  Pradanam Sutra partner
                 </span>
-              )}
-            </div>
+                {restaurant.isAcceptingDonations && (
+                  <span className="flex items-center gap-1.5 rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm">
+                    <span className="live-dot" />
+                    Accepting donations
+                  </span>
+                )}
+              </div>
 
-            <h1 className="display-lg mt-4 text-paper">{restaurant.name}</h1>
-            <p className="mt-2 flex items-center gap-1.5 text-[13px] text-paper/70">
-              <MapPin size={13} strokeWidth={1.6} />
-              {restaurant.address.line1}
-              {restaurant.address.line2 ? `, ${restaurant.address.line2}` : ''} ·{' '}
-              {restaurant.address.city}
-            </p>
+              <h1 className="display-lg mt-3.5 text-paper">{restaurant.name}</h1>
+              <p className="mt-2 flex items-center gap-1.5 text-[13px] text-paper/75">
+                <MapPin size={13} strokeWidth={1.6} />
+                {restaurant.address.line1}
+                {restaurant.address.line2 ? `, ${restaurant.address.line2}` : ''} ·{' '}
+                {restaurant.address.city}
+              </p>
+            </div>
           </div>
         </section>
 
         {/* ------------------------------------------- where the food goes */}
         <section className="container-lux py-10 md:py-12">
-          <div className="grid gap-8 lg:grid-cols-[1fr_26rem] lg:gap-14">
-            <div>
+          {/* The card is a fixed 23rem; the text column takes the rest but
+              holds its own readable measure, so a wide window adds margin
+              rather than a stranded gap between the two. */}
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_23rem] lg:gap-16">
+            <div className="max-w-2xl">
               <p className="eyebrow">Where the food goes</p>
-              <h2 className="display-md mt-3 max-w-md text-balance-lux">
-                Cooked here. Served <em className="font-normal italic text-emerald">there.</em>
+              <h2 className="display-md mt-3 text-balance-lux">
+                Cooked here. Served <em className="font-normal italic text-brand">there.</em>
               </h2>
+
+              {restaurant.description && (
+                <p className="mt-5 text-[14.5px] leading-relaxed text-ink-soft">
+                  {restaurant.description}
+                </p>
+              )}
+
+              {restaurant.cuisine.length > 0 && (
+                <div className="mt-5 flex flex-wrap gap-1.5">
+                  {restaurant.cuisine.map((c) => (
+                    <span
+                      key={c}
+                      className="rounded-full border border-line bg-surface px-2.5 py-1 text-[11.5px] text-ink-soft"
+                    >
+                      {c}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              <ol className="mt-8 grid gap-4 border-t border-line pt-7 sm:grid-cols-3">
+                {[
+                  ['You pay half', 'Pick a dish at half its menu price.'],
+                  [`${restaurant.name} pays the rest`, 'The kitchen matches you, plate for plate.'],
+                  [
+                    ngo ? `${ngo.name.split(' - ')[0]} confirms` : 'The NGO confirms',
+                    'Counted on arrival, and shown on your tracking page.',
+                  ],
+                ].map(([title, body], i) => (
+                  <li key={title}>
+                    <span className="numeral text-[13px] text-ink-faint">0{i + 1}</span>
+                    <p className="mt-1.5 text-[13.5px] font-medium text-ink">{title}</p>
+                    <p className="mt-1 text-[12.5px] leading-relaxed text-ink-mute">{body}</p>
+                  </li>
+                ))}
+              </ol>
             </div>
 
             <aside className="card-lux h-fit p-6">
@@ -176,7 +255,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       {ngo.beneficiaryFocus.slice(0, 2).map((focus) => (
                         <span
                           key={focus}
-                          className="rounded-full bg-emerald-wash px-2.5 py-1 text-[11px] text-emerald"
+                          className="rounded-full bg-brand-wash px-2.5 py-1 text-[11px] text-brand"
                         >
                           {focus}
                         </span>
@@ -201,7 +280,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       </p>
                       <CountUp
                         value={restaurant.stats.totalPortions}
-                        className="numeral mt-1.5 block text-[1.65rem] leading-none text-emerald tabular-nums"
+                        className="numeral mt-1.5 block text-[1.65rem] leading-none text-brand tabular-nums"
                       />
                     </div>
                   </div>
@@ -209,7 +288,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                   <p className="mt-5 flex items-start gap-2.5 text-[12px] leading-relaxed text-ink-mute">
                     <ShieldCheck
                       size={20}
-                      className="mt-px shrink-0 text-emerald"
+                      className="mt-px shrink-0 text-brand"
                       strokeWidth={1.5}
                     />
                     Meals are dispatched in batches when fully funded, and verified by {ngo.name}.
@@ -220,7 +299,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       href={ngo.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-4 inline-flex items-center gap-1 text-[11px] text-ink-mute underline decoration-line underline-offset-2 transition-colors hover:text-emerald hover:decoration-emerald/40"
+                      className="mt-4 inline-flex items-center gap-1 text-[11px] text-ink-mute underline decoration-line underline-offset-2 transition-colors hover:text-brand hover:decoration-brand/40"
                     >
                       {displayDomain(ngo.website)}
                       <ExternalLink size={10} strokeWidth={1.8} />
@@ -248,10 +327,18 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
             </div>
 
             {activeBatches.length > 0 && (
-              <div className="mt-8 flex flex-col gap-3.5 max-w-xl">
+              <div className="mt-8">
                 <p className="text-[11.5px] font-medium uppercase tracking-[0.1em] text-ink-mute">
                   Active Batches Funding Now
                 </p>
+
+                {/*
+                  auto-fit lays the cards across the row and only wraps when
+                  they no longer fit: two batches sit side by side, four fill a
+                  wide row, and a single one keeps a sane width instead of
+                  stretching the full container.
+                */}
+                <div className="mt-3.5 grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(15rem,22rem))]">
                 {activeBatches.map(b => {
                   const item = items.find(i => i._id === b.menuItem);
                   if (!item) return null;
@@ -259,7 +346,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                   return (
                     <div
                       key={b.batchId}
-                      className="group relative flex flex-col gap-3 overflow-hidden rounded-[18px] border border-line/60 bg-gradient-to-b from-surface to-paper p-5 transition-all duration-300 hover:border-emerald/30 hover:shadow-[0_4px_20px_-4px_rgba(16,185,129,0.1)]"
+                      className="group relative flex flex-col gap-3 overflow-hidden rounded-[18px] border border-line/60 bg-gradient-to-b from-surface to-paper p-5 transition-all duration-300 hover:border-brand/30 hover:shadow-[0_6px_22px_-8px_rgba(23,63,124,0.22)]"
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3.5">
@@ -269,7 +356,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                             )}
                           </div>
                           <div>
-                            <h4 className="font-display text-[15px] font-medium leading-none text-ink group-hover:text-emerald transition-colors">
+                            <h4 className="font-display text-[15px] font-medium leading-none text-ink group-hover:text-brand transition-colors">
                               {item.name}
                             </h4>
                             <p className="mt-1.5 flex items-center gap-1.5 text-[11.5px] text-ink-mute">
@@ -278,7 +365,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="numeral text-[18px] font-semibold leading-none text-emerald">
+                          <p className="numeral text-[18px] font-semibold leading-none text-brand">
                             {progress}%
                           </p>
                           <p className="mt-1 text-[10px] font-medium uppercase tracking-[0.12em] text-ink-faint">
@@ -290,7 +377,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       <div className="relative mt-2">
                         <div className="h-2 w-full overflow-hidden rounded-full bg-line/50">
                           <div
-                            className="h-full rounded-full bg-emerald transition-all duration-1000 ease-out"
+                            className="h-full rounded-full bg-brand transition-all duration-1000 ease-out"
                             style={{ width: `${progress}%` }}
                           />
                         </div>
@@ -299,8 +386,8 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       <div className="flex items-center justify-between text-[12px] font-medium text-ink-mute">
                         <span className="flex items-center gap-2">
                           <span className="relative flex size-2 items-center justify-center">
-                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald opacity-20"></span>
-                            <span className="relative inline-flex size-1.5 rounded-full bg-emerald"></span>
+                            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand opacity-20"></span>
+                            <span className="relative inline-flex size-1.5 rounded-full bg-brand"></span>
                           </span>
                           <span className="text-ink">{b.collectedQuantity}</span> funded
                         </span>
@@ -309,6 +396,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                     </div>
                   );
                 })}
+                </div>
               </div>
             )}
 
@@ -321,8 +409,8 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                     className={cn(
                       'shrink-0 rounded-full border px-4 py-2 text-[13px] transition-all duration-300',
                       category === c
-                        ? 'border-emerald bg-emerald text-paper'
-                        : 'border-line bg-surface text-ink-soft hover:border-emerald/40 hover:text-emerald'
+                        ? 'border-brand bg-brand text-paper'
+                        : 'border-line bg-surface text-ink-soft hover:border-brand/40 hover:text-brand'
                     )}
                   >
                     {c}
@@ -379,7 +467,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                 <p className="eyebrow">Recently, at this counter</p>
                 <h2 className="display-md mt-4">
                   People who ate here, and paid it{' '}
-                  <em className="font-normal italic text-emerald">forward.</em>
+                  <em className="font-normal italic text-brand">forward.</em>
                 </h2>
                 <p className="mt-3 text-[13px] text-ink-soft">
                   The {realDonations.length} most recent{' '}
@@ -409,7 +497,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                     </blockquote>
                     <figcaption className="mt-5 flex items-center justify-between border-t border-line-soft pt-4 text-[12px]">
                       <span className="text-ink-soft">{d.donorSnapshot.name}</span>
-                      <span className="numeral text-emerald">
+                      <span className="numeral text-brand">
                         {formatInr(d.totalFoodValuePaise)} of food
                       </span>
                     </figcaption>

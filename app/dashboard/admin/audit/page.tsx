@@ -51,8 +51,8 @@ export default function AuditPage() {
             className={cn(
               'shrink-0 rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-300',
               entityType === e
-                ? 'border-emerald bg-emerald text-paper'
-                : 'border-line bg-surface text-ink-soft hover:border-emerald/40 hover:text-emerald'
+                ? 'border-brand bg-brand text-paper'
+                : 'border-line bg-surface text-ink-soft hover:border-brand/40 hover:text-brand'
             )}
           >
             {e === 'all' ? 'Everything' : e}
@@ -79,7 +79,7 @@ export default function AuditPage() {
               {i < logs.length - 1 && (
                 <span aria-hidden className="absolute bottom-0 left-[7px] top-5 w-px bg-line" />
               )}
-              <span className="relative z-10 mt-1.5 size-[15px] shrink-0 rounded-full border-4 border-paper-deep bg-emerald/35" />
+              <span className="relative z-10 mt-1.5 size-[15px] shrink-0 rounded-full border-4 border-paper-deep bg-brand/35" />
 
               <div className="min-w-0 flex-1 rounded-[14px] border border-line bg-surface p-4">
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
@@ -109,7 +109,7 @@ export default function AuditPage() {
                       </code>
                     )}
                     {log.after && (
-                      <code className="rounded-md bg-emerald-wash px-2 py-1 text-emerald">
+                      <code className="rounded-md bg-brand-wash px-2 py-1 text-brand">
                         + {JSON.stringify(log.after).slice(0, 90)}
                       </code>
                     )}

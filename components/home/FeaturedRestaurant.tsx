@@ -30,7 +30,7 @@ export function FeaturedRestaurant({ restaurant }: { restaurant: Restaurant }) {
                   sizes="(max-width: 1024px) 100vw, 55vw"
                   className="object-cover transition-transform duration-[1.2s] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/28 to-transparent lg:bg-gradient-to-r" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/28 to-transparent lg:bg-gradient-to-r" />
               </div>
 
               <div className="flex flex-col justify-center p-8 md:p-11">
@@ -80,7 +80,7 @@ export function FeaturedRestaurant({ restaurant }: { restaurant: Restaurant }) {
                         {formatNumber(restaurant.stats.totalPortions)} portions
                       </span>
                     </dt>
-                    <dd className="numeral text-[1.6rem] leading-none text-emerald">
+                    <dd className="numeral text-[1.6rem] leading-none text-brand">
                       {formatInr(restaurant.stats.totalFoodValuePaise)}
                     </dd>
                   </div>

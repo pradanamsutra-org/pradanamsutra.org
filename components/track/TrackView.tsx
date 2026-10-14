@@ -93,7 +93,7 @@ export function TrackView({
   };
 
   const whatsappHref = `https://wa.me/?text=${encodeURIComponent(
-    `I funded ${donation.totalPortions} ${donation.totalPortions === 1 ? "portion" : "portions"} of food at ${restaurant.name} on DaanSetu. Follow it here: ${trackingUrl}`,
+    `I funded ${donation.totalPortions} ${donation.totalPortions === 1 ? "portion" : "portions"} of food at ${restaurant.name} on Pradanam Sutra. Follow it here: ${trackingUrl}`,
   )}`;
 
   return (
@@ -106,7 +106,7 @@ export function TrackView({
         <section className="grain relative overflow-hidden bg-paper-deep py-10 md:py-16">
           <div
             aria-hidden
-            className="pointer-events-none absolute -right-32 -top-32 size-[30rem] rounded-full bg-emerald-wash blur-3xl"
+            className="pointer-events-none absolute -right-32 -top-32 size-[30rem] rounded-full bg-brand-wash blur-3xl"
           />
           <div className="container-lux relative">
             <div className="flex flex-wrap items-center gap-3">
@@ -120,7 +120,7 @@ export function TrackView({
               {celebrate ? (
                 <>
                   You sent out{" "}
-                  <em className="font-normal italic text-emerald">
+                  <em className="font-normal italic text-brand">
                     {formatInr(donation.totalFoodValuePaise)} of food.
                   </em>
                 </>
@@ -136,7 +136,7 @@ export function TrackView({
                 <>
                   {donation.totalPortions}{" "}
                   {donation.totalPortions === 1 ? "portion" : "portions"}{" "}
-                  <em className="font-normal italic text-emerald">
+                  <em className="font-normal italic text-brand">
                     received by the NGO.
                   </em>
                 </>
@@ -145,7 +145,7 @@ export function TrackView({
                   {donation.totalPortions}{" "}
                   {donation.totalPortions === 1 ? "portion" : "portions"},
                   currently{" "}
-                  <em className="font-normal italic text-emerald">
+                  <em className="font-normal italic text-brand">
                     {statusMeta(donation.status).short.toLowerCase()}.
                   </em>
                 </>
@@ -162,7 +162,7 @@ export function TrackView({
               <button
                 onClick={copyLink}
                 title="Copy this donation's tracking link"
-                className="group flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-2.5 transition-colors hover:border-emerald/40"
+                className="group flex items-center gap-2.5 rounded-full border border-line bg-surface px-4 py-2.5 transition-colors hover:border-brand/40"
               >
                 <span className="text-[10.5px] uppercase tracking-[0.12em] text-ink-mute">
                   ID
@@ -171,11 +171,11 @@ export function TrackView({
                   {donation.donationId}
                 </span>
                 {copied ? (
-                  <Check size={13} className="text-emerald" strokeWidth={2.4} />
+                  <Check size={13} className="text-brand" strokeWidth={2.4} />
                 ) : (
                   <Copy
                     size={13}
-                    className="text-ink-mute transition-colors group-hover:text-emerald"
+                    className="text-ink-mute transition-colors group-hover:text-brand"
                   />
                 )}
               </button>
@@ -185,7 +185,7 @@ export function TrackView({
                 href={whatsappHref}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 text-[12.5px] text-ink-soft transition-colors hover:border-emerald/40 hover:text-emerald"
+                className="flex items-center gap-2 rounded-full border border-line bg-surface px-4 py-2.5 text-[12.5px] text-ink-soft transition-colors hover:border-brand/40 hover:text-brand"
               >
                 <Send size={13} strokeWidth={1.8} />
                 Send myself the link
@@ -195,7 +195,7 @@ export function TrackView({
         </section>
 
         {/* ---------------------------------------------------- journey */}
-        <section className="bg-[linear-gradient(to_bottom,var(--color-paper-deep)_0%,var(--color-emerald-wash)_16%,var(--color-emerald-wash)_84%,var(--color-paper)_100%)] py-12 md:py-16">
+        <section className="bg-[linear-gradient(to_bottom,var(--color-paper-deep)_0%,var(--color-brand-wash)_16%,var(--color-brand-wash)_84%,var(--color-paper)_100%)] py-12 md:py-16">
           <div className="container-lux">
             <div className="max-w-2xl">
               <h2 className="display-sm">The journey</h2>
@@ -217,7 +217,7 @@ export function TrackView({
                     "mt-10 rounded-[18px] border p-6",
                     flagged
                       ? "border-amber/30 bg-amber-tint"
-                      : "border-emerald/20 bg-emerald-wash",
+                      : "border-brand/20 bg-brand-wash",
                   )}
                 >
                   <p className="eyebrow">What the NGO counted on arrival</p>
@@ -226,7 +226,7 @@ export function TrackView({
                       <p
                         className={cn(
                           "numeral text-[2.2rem] leading-none",
-                          flagged ? "text-amber" : "text-emerald",
+                          flagged ? "text-amber" : "text-brand",
                         )}
                       >
                         {batchReceived} of {batchDispatched}
@@ -318,11 +318,11 @@ export function TrackView({
               </dd>
             </div>
 
-            <div className="bg-emerald-wash p-4 md:p-6">
-              <dt className="text-[10px] uppercase tracking-[0.11em] text-emerald md:text-[10.5px]">
+            <div className="bg-brand-wash p-4 md:p-6">
+              <dt className="text-[10px] uppercase tracking-[0.11em] text-brand md:text-[10.5px]">
                 Food donated
               </dt>
-              <dd className="numeral mt-2.5 text-[1.4rem] leading-none text-emerald md:text-[1.75rem]">
+              <dd className="numeral mt-2.5 text-[1.4rem] leading-none text-brand md:text-[1.75rem]">
                 {formatInr(donation.totalFoodValuePaise)}
               </dd>
               <dd className="mt-1.5 text-[11px] text-ink-mute">
@@ -343,8 +343,14 @@ export function TrackView({
                 </p>
               </div>
               <ul className="divide-y divide-line-soft px-5">
-                {donation.items.map((item) => (
-                  <li key={item.menuItem} className="flex gap-3.5 py-4">
+                {/*
+                  Keyed on the dish, not on menuItem: the public tracking
+                  payload strips internal references, so menuItem never
+                  arrives here (see publicDonation in donation.controller).
+                  A donation carries one line per dish, so the name is unique.
+                */}
+                {donation.items.map((item, i) => (
+                  <li key={`${item.name}-${i}`} className="flex gap-3.5 py-4">
                     {item.image && (
                       <div className="relative size-14 shrink-0 overflow-hidden rounded-lg">
                         <Image
@@ -409,7 +415,7 @@ export function TrackView({
               </div>
               <Link
                 href={`/restaurant/${restaurant.slug}`}
-                className="group mt-4 inline-flex items-center gap-1.5 text-[13px] text-emerald"
+                className="group mt-4 inline-flex items-center gap-1.5 text-[13px] text-brand"
               >
                 Donate here again
                 <ArrowRight
@@ -457,7 +463,7 @@ export function TrackView({
                     href={ngo.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-3.5 inline-flex items-center gap-1 text-[11px] text-ink-mute underline decoration-line underline-offset-2 transition-colors hover:text-emerald hover:decoration-emerald/40"
+                    className="mt-3.5 inline-flex items-center gap-1 text-[11px] text-ink-mute underline decoration-line underline-offset-2 transition-colors hover:text-brand hover:decoration-brand/40"
                   >
                     {displayDomain(ngo.website)}
                     <ExternalLink size={10} strokeWidth={1.8} />

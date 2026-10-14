@@ -18,7 +18,7 @@ interface Relationship {
 }
 
 const STATUS_TONE: Record<string, string> = {
-  active: 'border-emerald/25 bg-emerald-wash text-emerald',
+  active: 'border-brand/25 bg-brand-wash text-brand',
   pending: 'border-amber/25 bg-amber-tint text-amber',
   paused: 'border-line bg-paper text-ink-mute',
   ended: 'border-line bg-paper text-ink-mute',
@@ -46,7 +46,7 @@ export default function NgoPartnersPage() {
       <PageHeading
         eyebrow="Partner kitchens"
         title="Who cooks for you"
-        description="Restaurants routing their second service to your kitchens. New partnerships are set up by the DaanSetu team."
+        description="Restaurants routing their second service to your kitchens. New partnerships are set up by the Pradanam Sutra team."
       />
 
       {relationships.length === 0 ? (
@@ -75,7 +75,7 @@ export default function NgoPartnersPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-emerald-deep/75 via-emerald-deep/15 via-55% to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/75 via-brand-deep/15 via-55% to-transparent" />
                   <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 p-4">
                     <h2 className="font-display text-[1.25rem] font-medium tracking-[-0.02em] text-paper">
                       {r.name}
@@ -102,7 +102,7 @@ export default function NgoPartnersPage() {
 
                   <div className="mt-5 flex items-end justify-between border-t border-line-soft pt-4">
                     <div>
-                      <p className="numeral text-[1.35rem] leading-none text-emerald">
+                      <p className="numeral text-[1.35rem] leading-none text-brand">
                         {formatInr(r.stats?.totalFoodValuePaise ?? 0)}
                       </p>
                       <p className="mt-1 text-[10.5px] uppercase tracking-[0.11em] text-ink-mute">
@@ -112,7 +112,7 @@ export default function NgoPartnersPage() {
                     <Link
                       href={`/restaurant/${r.slug}`}
                       target="_blank"
-                      className="flex items-center gap-1.5 text-[12.5px] text-ink-soft transition-colors hover:text-emerald"
+                      className="flex items-center gap-1.5 text-[12.5px] text-ink-soft transition-colors hover:text-brand"
                     >
                       Their page
                       <ExternalLink size={12} />

@@ -234,7 +234,7 @@ export default function MenuPage() {
                       {item.isSignature && ' · Signature'}
                     </p>
                     {/* A dish is public only when the kitchen shows it AND
-                        DaanSetu has approved it for the pilot. */}
+                        Pradanam Sutra has approved it for the pilot. */}
                     {item.activeForDonation === false ? (
                       <p className="mt-2 inline-flex items-center gap-1.5 rounded-full border border-amber/30 bg-amber-tint px-2.5 py-1 text-[10.5px] uppercase tracking-[0.09em] text-amber">
                         Not in the pilot
@@ -252,7 +252,7 @@ export default function MenuPage() {
                     <button
                       onClick={() => openEdit(item)}
                       aria-label={`Edit ${item.name}`}
-                      className="flex size-8 items-center justify-center rounded-lg text-ink-mute transition-colors hover:bg-emerald-wash hover:text-emerald"
+                      className="flex size-8 items-center justify-center rounded-lg text-ink-mute transition-colors hover:bg-brand-wash hover:text-brand"
                     >
                       <Pencil size={13} />
                     </button>
@@ -272,7 +272,7 @@ export default function MenuPage() {
                       <span className="numeral text-[12px] text-ink-faint line-through">
                         {formatInr(item.mrpPaise)}
                       </span>
-                      <span className="numeral text-[1.15rem] leading-none text-emerald">
+                      <span className="numeral text-[1.15rem] leading-none text-brand">
                         {formatInr(splitPrice(item.mrpPaise, item.customerSharePercent).customerPaysPaise)}
                       </span>
                     </div>
@@ -295,9 +295,9 @@ export default function MenuPage() {
                     className={cn(
                       'inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[11.5px]',
                       'transition-all duration-150 active:scale-[0.94] disabled:cursor-wait',
-                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald',
+                      'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand',
                       item.isAvailable
-                        ? 'border-emerald/30 bg-emerald-wash text-emerald hover:border-emerald/60 hover:bg-emerald/10'
+                        ? 'border-brand/30 bg-brand-wash text-brand hover:border-brand/60 hover:bg-brand/10'
                         : 'border-line bg-paper text-ink-mute hover:border-ink-faint hover:text-ink-soft'
                     )}
                   >
@@ -308,7 +308,7 @@ export default function MenuPage() {
                         aria-hidden
                         className={cn(
                           'size-1.5 rounded-full transition-colors duration-150',
-                          item.isAvailable ? 'bg-emerald' : 'bg-ink-faint'
+                          item.isAvailable ? 'bg-brand' : 'bg-ink-faint'
                         )}
                       />
                     )}
@@ -411,7 +411,7 @@ export default function MenuPage() {
 
               {/* the split, previewed live as they type */}
               {Number(draft.mrpRupees) > 0 && (
-                <div className="flex items-center justify-between rounded-xl border border-emerald/20 bg-emerald-wash px-4 py-3.5">
+                <div className="flex items-center justify-between rounded-xl border border-brand/20 bg-brand-wash px-4 py-3.5">
                   <div>
                     <p className="text-[11px] uppercase tracking-[0.11em] text-ink-mute">
                       Guest pays
@@ -439,8 +439,8 @@ export default function MenuPage() {
                   </div>
                   <span className="text-ink-faint">=</span>
                   <div>
-                    <p className="text-[11px] uppercase tracking-[0.11em] text-emerald">Food sent</p>
-                    <p className="numeral mt-1 text-[1.3rem] leading-none text-emerald">
+                    <p className="text-[11px] uppercase tracking-[0.11em] text-brand">Food sent</p>
+                    <p className="numeral mt-1 text-[1.3rem] leading-none text-brand">
                       {formatInr(Math.round(Number(draft.mrpRupees) * 100))}
                     </p>
                   </div>
@@ -497,7 +497,7 @@ export default function MenuPage() {
                     className={cn(
                       'rounded-full border px-3.5 py-2 text-[12.5px] transition-colors',
                       draft[key]
-                        ? 'border-emerald bg-emerald text-paper'
+                        ? 'border-brand bg-brand text-paper'
                         : 'border-line bg-surface text-ink-soft'
                     )}
                   >

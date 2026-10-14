@@ -28,7 +28,7 @@ function Inner({ children }: { children: React.ReactNode }) {
   return (
     <DashboardShell
       nav={NAV}
-      workspace="DaanSetu"
+      workspace="Pradanam Sutra"
       workspaceKind={`Platform admin · ${user?.name ?? ''}`}
       publicLink={{ href: '/', label: 'View public site' }}
     >

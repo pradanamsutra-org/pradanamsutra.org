@@ -11,7 +11,7 @@ export default function JoinNgoPage() {
       eyebrow="For NGOs"
       title={
         <>
-          Meals you can <em className="font-normal italic text-emerald">count.</em>
+          Meals you can <em className="font-normal italic text-brand">count.</em>
         </>
       }
       subtitle="Tell us about your organisation. Once approved, partner kitchens can route their second service to you and you confirm every batch that arrives."
@@ -19,7 +19,7 @@ export default function JoinNgoPage() {
       <PartnerForm kind="ngo" />
       <p className="mt-7 text-[13px] text-ink-soft">
         A restaurant instead?{' '}
-        <Link href="/join/restaurant" className="text-emerald underline underline-offset-2">
+        <Link href="/join/restaurant" className="text-brand underline underline-offset-2">
           Apply here
         </Link>
       </p>

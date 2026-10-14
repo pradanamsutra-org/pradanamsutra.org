@@ -24,7 +24,7 @@ interface Data {
 }
 
 const STATUS_TONE: Record<string, string> = {
-  active: 'border-emerald/25 bg-emerald-wash text-emerald',
+  active: 'border-brand/25 bg-brand-wash text-brand',
   pending: 'border-amber/25 bg-amber-tint text-amber',
   paused: 'border-line bg-paper text-ink-mute',
   ended: 'border-line bg-paper text-ink-mute',
@@ -136,7 +136,7 @@ export default function RestaurantPartnersPage() {
               key={rel._id}
               className={cn(
                 'rounded-[18px] border bg-surface p-5',
-                rel.isPrimary ? 'border-emerald/30' : 'border-line'
+                rel.isPrimary ? 'border-brand/30' : 'border-line'
               )}
             >
               <div className="flex flex-wrap items-start gap-4">
@@ -158,7 +158,7 @@ export default function RestaurantPartnersPage() {
                       {rel.ngo.name}
                     </h2>
                     {rel.isPrimary && (
-                      <span className="flex items-center gap-1.5 rounded-full border border-emerald/25 bg-emerald-wash px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] text-emerald">
+                      <span className="flex items-center gap-1.5 rounded-full border border-brand/25 bg-brand-wash px-2.5 py-1 text-[10px] uppercase tracking-[0.1em] text-brand">
                         <Star size={9} strokeWidth={2.4} />
                         Primary
                       </span>
@@ -237,7 +237,7 @@ export default function RestaurantPartnersPage() {
         <section className="mt-12">
           <h2 className="display-sm">Approved NGOs you can partner with</h2>
           <p className="mt-1.5 text-[13px] text-ink-soft">
-            Every organisation here has been checked by DaanSetu.
+            Every organisation here has been checked by Pradanam Sutra.
           </p>
 
           <ul className="mt-6 grid gap-4 md:grid-cols-2">

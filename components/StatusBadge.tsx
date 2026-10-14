@@ -4,10 +4,10 @@ import { statusMeta, BATCH_META, type BatchStatus } from '@/lib/types';
 const TONE: Record<string, string> = {
   PENDING_PAYMENT: 'bg-paper-deep text-ink-mute border-line',
   PAYMENT_SUCCESS: 'bg-paper-deep text-ink-soft border-line',
-  ASSIGNED_TO_BATCH: 'bg-brass-tint text-brass border-brass/25',
+  ASSIGNED_TO_BATCH: 'bg-accent-tint text-accent border-accent/25',
   DISPATCHED: 'bg-amber-tint text-amber border-amber/25',
   UNDER_REVIEW: 'bg-amber-tint text-amber border-amber/30',
-  NGO_CONFIRMED: 'bg-emerald text-paper border-emerald',
+  NGO_CONFIRMED: 'bg-brand text-paper border-brand',
   FAILED: 'bg-danger-tint text-danger border-danger/25',
   CANCELLED: 'bg-danger-tint text-danger border-danger/25',
   REFUNDED: 'bg-danger-tint text-danger border-danger/25',
@@ -47,10 +47,10 @@ export function StatusBadge({
 
 const BATCH_TONE: Record<BatchStatus, string> = {
   IN_PROGRESS: 'bg-paper-deep text-ink-soft border-line',
-  READY_FOR_DELIVERY: 'bg-brass-tint text-brass border-brass/30',
+  READY_FOR_DELIVERY: 'bg-accent-tint text-accent border-accent/30',
   DISPATCHED: 'bg-amber-tint text-amber border-amber/25',
   RECONCILIATION_REQUIRED: 'bg-danger-tint text-danger border-danger/25',
-  COMPLETED: 'bg-emerald text-paper border-emerald',
+  COMPLETED: 'bg-brand text-paper border-brand',
 };
 
 export function BatchStatusBadge({

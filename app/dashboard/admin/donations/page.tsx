@@ -41,7 +41,7 @@ export default function AdminDonationsPage() {
       <PageHeading
         eyebrow="Donations"
         title="Every plate on the platform"
-        description="View the complete history of donations made through DaanSetu."
+        description="View the complete history of donations made through Pradanam Sutra."
       />
 
       <div className="no-scrollbar -mx-5 flex gap-2 overflow-x-auto px-5 pb-6 md:mx-0 md:px-0">
@@ -52,8 +52,8 @@ export default function AdminDonationsPage() {
             className={cn(
               'shrink-0 rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-300',
               filter === f.value
-                ? 'border-emerald bg-emerald text-paper'
-                : 'border-line bg-surface text-ink-soft hover:border-emerald/40 hover:text-emerald'
+                ? 'border-brand bg-brand text-paper'
+                : 'border-line bg-surface text-ink-soft hover:border-brand/40 hover:text-brand'
             )}
           >
             {f.label}
@@ -104,7 +104,7 @@ export default function AdminDonationsPage() {
                   </div>
 
                   <div className="shrink-0 text-right">
-                    <p className="numeral text-[1.25rem] leading-none text-emerald">
+                    <p className="numeral text-[1.25rem] leading-none text-brand">
                       {formatInr(d.totalFoodValuePaise)}
                     </p>
                     <p className="mt-1 text-[11.5px] text-ink-mute">
@@ -121,7 +121,7 @@ export default function AdminDonationsPage() {
                   <Link
                     href={`/track/${d.donationId}`}
                     target="_blank"
-                    className="ml-auto flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-emerald"
+                    className="ml-auto flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-brand"
                   >
                     Donor view
                     <ExternalLink size={12} />

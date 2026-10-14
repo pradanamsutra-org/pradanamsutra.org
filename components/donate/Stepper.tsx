@@ -23,7 +23,7 @@ export function Stepper({
         onClick={() => onChange(1)}
         aria-label={`Add ${label}`}
         className={cn(
-          'btn btn-outline shrink-0 border-emerald/30 px-5 text-emerald hover:bg-emerald hover:text-paper',
+          'btn btn-outline shrink-0 border-brand/30 px-5 text-brand hover:bg-brand hover:text-paper',
           pad
         )}
       >
@@ -36,7 +36,7 @@ export function Stepper({
   return (
     <div
       className={cn(
-        'flex shrink-0 items-center overflow-hidden rounded-full border border-emerald/30 bg-emerald-wash',
+        'flex shrink-0 items-center overflow-hidden rounded-full border border-brand/30 bg-brand-wash',
         pad
       )}
     >
@@ -44,7 +44,7 @@ export function Stepper({
         onClick={() => onChange(value - 1)}
         aria-label={`Remove one ${label}`}
         className={cn(
-          'flex items-center justify-center text-emerald transition-colors hover:bg-emerald hover:text-paper',
+          'flex items-center justify-center text-brand transition-colors hover:bg-brand hover:text-paper',
           btn
         )}
       >
@@ -52,7 +52,7 @@ export function Stepper({
       </button>
       <span
         aria-live="polite"
-        className="numeral min-w-8 text-center text-[15px] font-medium text-emerald"
+        className="numeral min-w-8 text-center text-[15px] font-medium text-brand"
       >
         {value}
       </span>
@@ -60,7 +60,7 @@ export function Stepper({
         onClick={() => onChange(value + 1)}
         aria-label={`Add one more ${label}`}
         className={cn(
-          'flex items-center justify-center text-emerald transition-colors hover:bg-emerald hover:text-paper',
+          'flex items-center justify-center text-brand transition-colors hover:bg-brand hover:text-paper',
           btn
         )}
       >

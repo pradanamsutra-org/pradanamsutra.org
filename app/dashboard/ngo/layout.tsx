@@ -55,7 +55,7 @@ function Inner({ children }: { children: React.ReactNode }) {
           <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">
             {pending
               ? 'Once approved, partner kitchens can route their second service to you and this is where you confirm what arrives.'
-              : 'Nothing has been deleted, but kitchens cannot send you food right now. Get in touch with DaanSetu.'}
+              : 'Nothing has been deleted, but kitchens cannot send you food right now. Get in touch with Pradanam Sutra.'}
           </p>
         </div>
       )}

@@ -47,7 +47,7 @@ const FILTERS: { value: string; label: string }[] = [
 ];
 
 const TONE: Record<Approval, string> = {
-  approved: 'border-emerald/25 bg-emerald-wash text-emerald',
+  approved: 'border-brand/25 bg-brand-wash text-brand',
   pending: 'border-amber/25 bg-amber-tint text-amber',
   rejected: 'border-danger/25 bg-danger-tint text-danger',
   suspended: 'border-line bg-paper text-ink-mute',
@@ -117,8 +117,8 @@ export function ApprovalList({
             className={cn(
               'shrink-0 rounded-full border px-3.5 py-1.5 text-[12.5px] transition-all duration-300',
               filter === f.value
-                ? 'border-emerald bg-emerald text-paper'
-                : 'border-line bg-surface text-ink-soft hover:border-emerald/40 hover:text-emerald'
+                ? 'border-brand bg-brand text-paper'
+                : 'border-line bg-surface text-ink-soft hover:border-brand/40 hover:text-brand'
             )}
           >
             {f.label}
@@ -198,7 +198,7 @@ export function ApprovalList({
                   <Link
                     href={publicPath(entity.slug)}
                     target="_blank"
-                    className="flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-emerald"
+                    className="flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-brand"
                   >
                     View
                     <ExternalLink size={12} />
@@ -210,7 +210,7 @@ export function ApprovalList({
                 <>
                   <button
                     onClick={() => setMenuFor(menuFor === entity._id ? null : entity._id)}
-                    className="mt-4 flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-emerald"
+                    className="mt-4 flex items-center gap-1.5 text-[12.5px] text-ink-mute transition-colors hover:text-brand"
                   >
                     <UtensilsCrossed size={13} strokeWidth={1.7} />
                     {menuFor === entity._id ? 'Hide pilot menu' : 'Pilot menu'}
@@ -352,7 +352,7 @@ function PilotMenu({ restaurantId }: { restaurantId: string }) {
               className={cn(
                 'shrink-0 rounded-full border px-3 py-1.5 text-[11.5px] transition-colors',
                 item.activeForDonation
-                  ? 'border-emerald/25 bg-emerald-wash text-emerald'
+                  ? 'border-brand/25 bg-brand-wash text-brand'
                   : 'border-line bg-surface text-ink-mute'
               )}
             >

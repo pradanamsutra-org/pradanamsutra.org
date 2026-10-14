@@ -27,7 +27,7 @@ export default async function HomePage() {
 
   return (
     <>
-      <SiteHeader transparent />
+      <SiteHeader />
       <main>
         <Hero foodValuePaise={foodValuePaise} portions={portions} />
         <HowItWorks />

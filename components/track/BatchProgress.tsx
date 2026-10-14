@@ -36,7 +36,7 @@ export function BatchProgress({ batches }: { batches: TrackedBatch[] }) {
                   <Icon
                     size={14}
                     strokeWidth={1.8}
-                    className={cn('shrink-0', batch.shortfall ? 'text-amber' : 'text-emerald')}
+                    className={cn('shrink-0', batch.shortfall ? 'text-amber' : 'text-brand')}
                   />
                   {batch.quantity} × {batch.itemName}
                 </p>
@@ -62,7 +62,7 @@ export function BatchProgress({ batches }: { batches: TrackedBatch[] }) {
                 </div>
                 <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-line-soft">
                   <div
-                    className="h-full rounded-full bg-emerald transition-all duration-700"
+                    className="h-full rounded-full bg-brand transition-all duration-700"
                     style={{ width: `${percent}%` }}
                   />
                 </div>
@@ -86,7 +86,7 @@ export function BatchProgress({ batches }: { batches: TrackedBatch[] }) {
                     <dd
                       className={cn(
                         'numeral mt-0.5',
-                        batch.shortfall ? 'text-amber' : 'text-emerald'
+                        batch.shortfall ? 'text-amber' : 'text-brand'
                       )}
                     >
                       {batch.receivedQuantity} portions
@@ -106,7 +106,7 @@ export function BatchProgress({ batches }: { batches: TrackedBatch[] }) {
             )}
 
             {batch.resolutionNote && (
-              <p className="mt-2.5 border-l-2 border-emerald/40 pl-3.5 text-[12.5px] leading-relaxed text-emerald">
+              <p className="mt-2.5 border-l-2 border-brand/40 pl-3.5 text-[12.5px] leading-relaxed text-brand">
                 Resolved: {batch.resolutionNote}
               </p>
             )}

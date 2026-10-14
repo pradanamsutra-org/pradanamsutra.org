@@ -150,7 +150,7 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
         key: order.keyId!,
         amount: order.amountPaise,
         currency: order.currency,
-        name: 'DaanSetu',
+        name: 'Pradanam Sutra',
         description: `${totals.portions} ${totals.portions === 1 ? 'portion' : 'portions'} from ${restaurant.name}`,
         order_id: order.orderId,
         prefill: { name: form.name, contact: form.phone },
@@ -244,9 +244,9 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
           <div className="flex items-center justify-between gap-4">
             <Link
               href={`/restaurant/${restaurant.slug}`}
-              className="group inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:text-emerald"
+              className="group inline-flex items-center gap-2 text-[10.5px] uppercase tracking-[0.14em] text-ink-mute transition-colors hover:text-brand"
             >
-              <span className="flex size-6 items-center justify-center rounded-full border border-line bg-surface transition-colors group-hover:border-emerald/40">
+              <span className="flex size-6 items-center justify-center rounded-full border border-line bg-surface transition-colors group-hover:border-brand/40">
                 <ArrowLeft size={11} strokeWidth={2} />
               </span>
               Back
@@ -270,7 +270,7 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
               <div
                 ref={phoneWrapRef}
                 className={cn(
-                  'flex items-center rounded-xl border bg-surface transition-colors focus-within:border-emerald',
+                  'flex items-center rounded-xl border bg-surface transition-colors focus-within:border-brand',
                   errors.phone ? 'border-danger' : 'border-line',
                   nudge && 'attention'
                 )}
@@ -357,7 +357,7 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
                   >
                     <input
                       type="checkbox"
-                      className="mt-0.5 size-4 shrink-0 accent-emerald"
+                      className="mt-0.5 size-4 shrink-0 accent-brand"
                       checked={consent.publicName && Boolean(form.name.trim())}
                       disabled={!form.name.trim()}
                       onChange={(e) => setConsent({ ...consent, publicName: e.target.checked })}
@@ -378,7 +378,7 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
                   >
                     <input
                       type="checkbox"
-                      className="mt-0.5 size-4 shrink-0 accent-emerald"
+                      className="mt-0.5 size-4 shrink-0 accent-brand"
                       checked={consent.publicMessage && Boolean(form.message.trim())}
                       disabled={!form.message.trim()}
                       onChange={(e) => setConsent({ ...consent, publicMessage: e.target.checked })}
@@ -437,17 +437,17 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
                 <div className="space-y-2.5 border-t border-line px-6 py-5 text-[13.5px]">
                   <div className="flex justify-between text-ink-soft">
                     <span>{restaurant.name} matches</span>
-                    <span className="numeral text-emerald">
+                    <span className="numeral text-brand">
                       + {formatInr(totals.restaurantPaise)}
                     </span>
                   </div>
                   <div className="flex justify-between text-ink-soft">
                     <span>Platform fee</span>
-                    <span className="text-emerald">Nil</span>
+                    <span className="text-brand">Nil</span>
                   </div>
                   <div className="flex justify-between text-ink-soft">
                     <span>Food sent out</span>
-                    <span className="numeral text-emerald">
+                    <span className="numeral text-brand">
                       {formatInr(totals.foodValuePaise)}
                     </span>
                   </div>
@@ -459,8 +459,8 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
                   </div>
                 </div>
 
-                <div className="bg-emerald-wash px-6 py-4">
-                  <p className="flex items-center gap-2 text-[13px] font-medium text-emerald">
+                <div className="bg-brand-wash px-6 py-4">
+                  <p className="flex items-center gap-2 text-[13px] font-medium text-brand">
                     <HandHeart size={14} strokeWidth={1.7} />
                     {totals.portions} {totals.portions === 1 ? 'portion' : 'portions'} of food
                   </p>

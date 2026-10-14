@@ -74,7 +74,7 @@ export default function AdminOverview() {
           label="Food donated"
           value={formatInr(data.totals.foodValuePaise)}
           sub={`${formatNumber(data.totals.portions)} portions`}
-          tone="emerald"
+          tone="brand"
         />
         <StatCard
           label="Guests paid"
@@ -141,7 +141,7 @@ export default function AdminOverview() {
                   </div>
                   <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-line-soft">
                     <div
-                      className="h-full rounded-full bg-emerald transition-all duration-700"
+                      className="h-full rounded-full bg-brand transition-all duration-700"
                       style={{ width: `${(count / total) * 100}%` }}
                     />
                   </div>

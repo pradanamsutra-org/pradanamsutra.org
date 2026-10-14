@@ -52,7 +52,7 @@ export const STATUS_META: Record<AnyStatus, StatusMeta> = {
     label: 'Receipt recorded with a shortfall — under review',
     short: 'Under review',
     blurb:
-      'The NGO counted fewer portions than the kitchen sent. DaanSetu is reconciling the difference, and this page will say what was decided.',
+      'The NGO counted fewer portions than the kitchen sent. Pradanam Sutra is reconciling the difference, and this page will say what was decided.',
   },
   NGO_CONFIRMED: {
     label: 'Confirmed by the NGO',
@@ -204,7 +204,7 @@ export interface MenuItem {
   servingSize?: string;
   isAvailable: boolean;
   /**
-   * Whether DaanSetu has approved this dish for the pilot. The kitchen controls
+   * Whether Pradanam Sutra has approved this dish for the pilot. The kitchen controls
    * isAvailable; a guest sees the dish only when both are true.
    */
   activeForDonation?: boolean;

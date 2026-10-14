@@ -71,7 +71,7 @@ function Inner({ children }: { children: React.ReactNode }) {
           <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">
             {pending
               ? 'Set up your menu and pick an NGO partner in the meantime — your donation page and QR code go live as soon as you are approved.'
-              : 'Nothing has been deleted, but your donation page is hidden. Get in touch with DaanSetu to sort this out.'}
+              : 'Nothing has been deleted, but your donation page is hidden. Get in touch with Pradanam Sutra to sort this out.'}
           </p>
         </div>
       )}

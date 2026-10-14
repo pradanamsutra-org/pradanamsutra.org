@@ -97,7 +97,7 @@ export default function QrPage() {
               Scan to fund a dish at half price. We match the other half, and you can follow it all
               the way to the person who receives it.
             </p>
-            <p className="mt-4 font-display text-[15px] italic text-emerald">daansetu.in</p>
+            <p className="mt-4 font-display text-[15px] italic text-brand">daansetu.in</p>
           </div>
 
           <div className="mt-6 flex gap-3">
@@ -118,13 +118,13 @@ export default function QrPage() {
             <p className="eyebrow">Where it points</p>
             <button
               onClick={copy}
-              className="group mt-4 flex w-full items-center justify-between gap-4 rounded-xl border border-line bg-paper px-4 py-3.5 text-left transition-colors hover:border-emerald/40"
+              className="group mt-4 flex w-full items-center justify-between gap-4 rounded-xl border border-line bg-paper px-4 py-3.5 text-left transition-colors hover:border-brand/40"
             >
               <span className="truncate text-[13.5px] text-ink">{data.url}</span>
               {copied ? (
-                <Check size={15} className="shrink-0 text-emerald" strokeWidth={2.4} />
+                <Check size={15} className="shrink-0 text-brand" strokeWidth={2.4} />
               ) : (
-                <Copy size={15} className="shrink-0 text-ink-mute group-hover:text-emerald" />
+                <Copy size={15} className="shrink-0 text-ink-mute group-hover:text-brand" />
               )}
             </button>
             <p className="mt-3 text-[12.5px] leading-relaxed text-ink-mute">
@@ -143,7 +143,7 @@ export default function QrPage() {
                 ['On your receipts', 'Print the link; it works without the code.'],
               ].map(([title, body]) => (
                 <li key={title} className="flex gap-3.5">
-                  <span className="mt-2 size-1 shrink-0 rounded-full bg-emerald" />
+                  <span className="mt-2 size-1 shrink-0 rounded-full bg-brand" />
                   <div>
                     <p className="text-[13.5px] font-medium text-ink">{title}</p>
                     <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-soft">{body}</p>

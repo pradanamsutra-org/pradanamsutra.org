@@ -3,10 +3,12 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { motion } from 'motion/react';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { Logo } from './Logo';
 import { useAuth, homeForRole } from '@/lib/auth-context';
 import { cn } from '@/lib/utils';
+import { useHeaderScroll, EASE_EXPO } from '@/lib/use-header-scroll';
 import { DONATE_HREF } from '@/lib/config';
 
 const LINKS = [
@@ -15,126 +17,152 @@ const LINKS = [
   { href: '/track', label: 'Track Donation' },
 ];
 
-export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
-  const [scrolled, setScrolled] = useState(false);
+export function SiteHeader() {
+  const { island, hidden } = useHeaderScroll();
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const pathname = usePathname();
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   useEffect(() => setOpen(false), [pathname]);
 
-  useEffect(() => {
-    document.body.style.overflow = open ? 'hidden' : '';
-    return () => {
-      document.body.style.overflow = '';
-    };
-  }, [open]);
-
-  const solid = scrolled || !transparent || open;
+  const shaped = island || open;
 
   return (
-    <>
-      <header
+    <motion.header
+      // Never slide away with the menu open — it would take the menu with it.
+      animate={{ y: hidden && !open ? '-130%' : 0 }}
+      transition={{ duration: 0.5, ease: EASE_EXPO }}
+      className="fixed inset-x-0 top-0 z-50 px-3 sm:px-4"
+    >
+      <div
         className={cn(
-          'fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
-          solid
-            ? 'border-b border-line bg-paper/85 backdrop-blur-xl'
-            : 'border-b border-transparent bg-transparent'
+          'mx-auto transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]',
+          // The radius eases to 2rem rather than to a 9999px pill, which snaps.
+          shaped
+            ? 'mt-3 max-w-[1120px] rounded-[2rem] ring-1 ring-ink/10 backdrop-blur-xl'
+            : 'mt-0 max-w-[1600px] rounded-[0px] bg-transparent',
+          island && !open && 'bg-paper/70 shadow-[0_12px_40px_-20px_rgba(10,20,40,0.35)]',
+          open && 'bg-paper/95 shadow-[0_18px_50px_-20px_rgba(10,20,40,0.45)]'
         )}
       >
-        <div className="container-lux flex h-16 items-center justify-between md:h-[74px]">
-          <Logo />
+        <nav
+          className={cn(
+            'relative flex items-center justify-between transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]',
+            shaped ? 'py-2 pl-4 pr-2 sm:pl-5' : 'px-3 py-5 sm:px-6 lg:px-10'
+          )}
+        >
+          <Logo compact={island} className="shrink-0" />
 
-          <nav className="hidden items-center gap-7 md:flex">
+          {/* Absolutely centred, so the links hold the middle whatever the logo
+              and the button on either side are doing. */}
+          <ul className="absolute left-1/2 top-1/2 hidden -translate-x-1/2 -translate-y-1/2 gap-10 lg:flex">
             {LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[13.5px] tracking-[-0.022em] text-ink-soft transition-colors duration-300 hover:text-emerald"
-              >
-                {link.label}
-              </Link>
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="group relative text-[14.5px] font-medium tracking-[-0.015em] text-ink"
+                >
+                  {link.label}
+                  <span className="absolute -bottom-1 left-0 h-px w-0 bg-brand transition-all duration-300 group-hover:w-full" />
+                </Link>
+              </li>
             ))}
-          </nav>
+          </ul>
 
-          <div className="hidden items-center gap-2 md:flex">
+          <div className="hidden shrink-0 items-center gap-1.5 lg:flex">
             {user ? (
-              <Link href={homeForRole(user.role)} className="btn btn-outline py-2.5 text-[13px] tracking-[-0.022em]">
+              <Link
+                href={homeForRole(user.role)}
+                className={cn(
+                  'group inline-flex items-center gap-1.5 rounded-full bg-brand font-medium text-paper transition-all duration-500 hover:bg-brand-deep',
+                  island ? 'px-5 py-2.5 text-[14px]' : 'px-6 py-3 text-[15px]'
+                )}
+              >
                 {user.role === 'customer' ? 'My donations' : 'Dashboard'}
-                <ArrowUpRight size={14} />
+                <ArrowUpRight
+                  size={15}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
               </Link>
             ) : (
-              <>
-                <Link href="/login" className="btn btn-ghost py-2.5 text-[13px] tracking-[-0.022em]">
-                  Sign in
-                </Link>
-                <Link href={DONATE_HREF} className="btn btn-primary py-2.5 text-[13px] tracking-[-0.022em]">
-                  Donate a meal
-                </Link>
-              </>
+              /*
+               * No sign-in here. Donating needs no account, and a donor reads
+               * their own history through the mobile number they gave at
+               * checkout (/track). Only partners sign in, and they reach it
+               * from the footer rather than from a guest's first screen.
+               */
+              <Link
+                href={DONATE_HREF}
+                className={cn(
+                  'group inline-flex items-center gap-1.5 rounded-full bg-brand font-medium text-paper transition-all duration-500 hover:bg-brand-deep',
+                  island ? 'px-5 py-2.5 text-[14px]' : 'px-6 py-3 text-[15px]'
+                )}
+              >
+                Donate a meal
+                <ArrowUpRight
+                  size={15}
+                  className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </Link>
             )}
           </div>
 
           <button
             onClick={() => setOpen((v) => !v)}
-            className="-mr-2 flex size-10 items-center justify-center text-ink md:hidden"
+            className="flex size-10 shrink-0 items-center justify-center rounded-full text-ink transition-colors hover:bg-brand-wash hover:text-brand lg:hidden"
             aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
           >
-            {open ? <X size={20} /> : <Menu size={20} />}
+            {open ? <X size={19} /> : <Menu size={19} />}
           </button>
-        </div>
-      </header>
+        </nav>
 
-      {/* Mobile sheet */}
-      <div
-        className={cn(
-          'fixed inset-0 z-40 bg-paper transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden',
-          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0'
-        )}
-      >
-        <div className="flex h-full flex-col px-6 pb-safe pt-24">
-          <nav className="flex flex-col">
-            {LINKS.map((link, i) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{ transitionDelay: open ? `${120 + i * 60}ms` : '0ms' }}
-                className={cn(
-                  'border-b border-line-soft py-5 font-display text-[1.75rem] tracking-[-0.02em] text-ink transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]',
-                  open ? 'translate-y-0 opacity-100' : 'translate-y-3 opacity-0'
+        {/*
+          On a phone the menu grows out of the same pill instead of throwing a
+          separate sheet over the page. The 0fr → 1fr row animates the height
+          without anyone having to measure the panel.
+        */}
+        <div
+          className={cn(
+            'grid lg:hidden',
+            'transition-[grid-template-rows] duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none',
+            open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'
+          )}
+        >
+          <div className="overflow-hidden">
+            <div className="px-4 pb-4 pt-1">
+              <nav className="flex flex-col">
+                {LINKS.map((link, i) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    style={{ transitionDelay: open ? `${90 + i * 55}ms` : '0ms' }}
+                    className={cn(
+                      'border-b border-line-soft py-3.5 text-[15px] tracking-[-0.015em] text-ink',
+                      'transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none',
+                      open ? 'translate-y-0 opacity-100' : 'translate-y-2 opacity-0'
+                    )}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+
+              <div className="mt-4 flex flex-col gap-2.5">
+                {user ? (
+                  <Link href={homeForRole(user.role)} className="btn btn-primary w-full">
+                    {user.role === 'customer' ? 'My donations' : 'Go to dashboard'}
+                  </Link>
+                ) : (
+                  <Link href={DONATE_HREF} className="btn btn-primary w-full">
+                    Donate a meal
+                  </Link>
                 )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          <div className="mt-auto flex flex-col gap-3 py-8">
-            {user ? (
-              <Link href={homeForRole(user.role)} className="btn btn-primary w-full">
-                {user.role === 'customer' ? 'My donations' : 'Go to dashboard'}
-              </Link>
-            ) : (
-              <>
-                <Link href={DONATE_HREF} className="btn btn-primary w-full">
-                  Donate a meal
-                </Link>
-                <Link href="/login" className="btn btn-outline w-full">
-                  Sign in
-                </Link>
-              </>
-            )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </motion.header>
   );
 }

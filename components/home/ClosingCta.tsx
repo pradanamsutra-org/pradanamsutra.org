@@ -8,7 +8,7 @@ export function ClosingCta() {
     <section className="grain relative overflow-hidden py-28 md:py-36">
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-1/2 size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-emerald-wash blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-1/2 size-[42rem] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-wash blur-3xl"
       />
       <div className="container-lux relative">
         <Reveal className="mx-auto max-w-2xl text-center">
