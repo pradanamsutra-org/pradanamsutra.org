@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils';
  */
 const DEMO = [
   { label: 'Admin', email: 'admin@daansetu.in' },
-  { label: 'Dil Dosa', email: 'kitchen@dildosa.in' },
+  { label: 'Dil Dosa Etc.', email: 'kitchen@dildosa.in' },
   { label: 'Parbhat', email: 'parbhat@daansetu.in' },
   { label: 'Donor', email: 'donor@daansetu.in' },
 ];

@@ -5,7 +5,7 @@ const STEPS = [
   {
     n: '01',
     title: 'Scan the code',
-    body: 'Dil Dosa has a Pradanam Sutra code on its tables and counter. One scan opens their donation menu — no app, no sign-up.',
+    body: 'Dil Dosa Etc. has a Pradanam Sutra code on its tables and counter. One scan opens their donation menu — no app, no sign-up.',
   },
   {
     n: '02',
@@ -15,7 +15,7 @@ const STEPS = [
   {
     n: '03',
     title: 'The kitchen matches you',
-    body: 'Dil Dosa commits the other half. Your ₹50 and their ₹50 become a ₹100 plate of food.',
+    body: 'Dil Dosa Etc. commits the other half. Your ₹50 and their ₹50 become a ₹100 plate of food.',
   },
   {
     n: '04',

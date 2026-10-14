@@ -13,7 +13,7 @@ import { DONATE_HREF } from '@/lib/config';
 
 const LINKS = [
   { href: '/#how', label: 'How it works' },
-  { href: DONATE_HREF, label: 'Dil Dosa' },
+  { href: DONATE_HREF, label: 'Dil Dosa Etc.' },
   { href: '/track', label: 'Track Donation' },
 ];
 

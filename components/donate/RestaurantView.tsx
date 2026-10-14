@@ -42,6 +42,10 @@ interface Props {
   recentDonations: RecentDonation[];
 }
 
+/** The translucent pill used over the cover artwork, wherever it sits. */
+const COVER_CHIP =
+  'inline-flex items-center gap-1.5 rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm';
+
 export function RestaurantView({ restaurant, items, partners, activeBatches, recentDonations }: Props) {
   const router = useRouter();
   const { island: headerIsland, hidden: headerHidden } = useHeaderScroll();
@@ -143,28 +147,39 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
               fill
               priority
               sizes="(max-width: 1536px) 100vw, 1536px"
-              /* Weighted below centre so the tables and lights stay in frame
-                 when the crop gets wide. */
-              className="object-cover object-[center_58%]"
+              /* Centred: the cover is a square graphic and the wide crop keeps
+                 only a middle band of it, so anything off-centre is lost. */
+              className="object-cover object-center"
             />
             {/* Scrim weighted to the bottom, where the name and address sit —
                 the top of the photo stays readable. */}
             <div className="absolute inset-0 bg-gradient-to-t from-brand-deep/85 via-brand-deep/20 via-45% to-transparent" />
 
+            {/*
+              On a phone the bottom of the cover has room for the name and the
+              address and nothing else, so the live pill rides the top-left
+              corner alone and the partner chip is dropped — the header already
+              says whose platform this is. From sm up both rejoin the name.
+            */}
+            {restaurant.isAcceptingDonations && (
+              <span className={cn(COVER_CHIP, 'absolute left-5 top-5 sm:hidden')}>
+                <span className="live-dot" />
+                Accepting donations
+              </span>
+            )}
+
             <div className="absolute inset-x-0 bottom-0 p-5 md:p-8">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm">
-                  Pradanam Sutra partner
-                </span>
+              <div className="hidden flex-wrap items-center gap-2 sm:flex">
+                <span className={COVER_CHIP}>Pradanam Sutra partner</span>
                 {restaurant.isAcceptingDonations && (
-                  <span className="flex items-center gap-1.5 rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm">
+                  <span className={COVER_CHIP}>
                     <span className="live-dot" />
                     Accepting donations
                   </span>
                 )}
               </div>
 
-              <h1 className="display-lg mt-3.5 text-paper">{restaurant.name}</h1>
+              <h1 className="display-lg text-paper sm:mt-3.5">{restaurant.name}</h1>
               <p className="mt-2 flex items-center gap-1.5 text-[13px] text-paper/75">
                 <MapPin size={13} strokeWidth={1.6} />
                 {restaurant.address.line1}
