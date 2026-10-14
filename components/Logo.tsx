@@ -35,13 +35,14 @@ export function Logo({
   return (
     <Link
       href={href}
-      className={cn('group inline-flex items-center gap-2.5 text-ink', className)}
+      className={cn('group inline-flex items-center gap-2 text-ink', className)}
     >
       <LogoMark className="h-7 w-auto transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-105" />
-      {/* The wide tracking is what makes the wordmark long, and a phone header
-          cannot spare it — so size and spacing both tighten below sm. */}
+      {/* Set tight: the emblem beside it is already wide, so a widely tracked
+          wordmark pushed the whole block past half a phone's header. Enough
+          letter-spacing is kept to hold uppercase apart, and no more. */}
       {!compact && (
-        <span className="whitespace-nowrap text-[11.5px] font-semibold uppercase tracking-[0.08em] text-brand sm:text-[14px] sm:tracking-[0.16em]">
+        <span className="whitespace-nowrap text-[12px] font-semibold uppercase tracking-[0.02em] text-brand sm:text-[14.5px] sm:tracking-[0.05em]">
           {BRAND_NAME}
         </span>
       )}
