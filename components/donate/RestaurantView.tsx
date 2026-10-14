@@ -113,23 +113,16 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
               : 'mt-0 max-w-[1600px] rounded-[0px] bg-paper/80 backdrop-blur-xl'
           )}
         >
-          {/* Centred the same way as the site masthead — empty cell, logo,
-              link — so the two public headers read as one. */}
           <div
             className={cn(
-              'grid grid-cols-[1fr_auto_1fr] items-center transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)] sm:flex sm:justify-between',
+              'flex items-center justify-between transition-all duration-500 [transition-timing-function:cubic-bezier(0.16,1,0.3,1)]',
               headerIsland ? 'py-2 pl-4 pr-4 sm:pl-5' : 'px-3 py-3.5 sm:px-6 lg:px-10'
             )}
           >
-            <span aria-hidden className="sm:hidden" />
-            <Logo
-              compact={headerIsland}
-              stacked={!headerIsland}
-              className="justify-self-center sm:justify-self-start"
-            />
+            <Logo compact={headerIsland} />
             <Link
               href="/track"
-              className="justify-self-end text-[13.5px] tracking-[-0.022em] text-ink-soft transition-colors hover:text-brand"
+              className="text-[13.5px] tracking-[-0.022em] text-ink-soft transition-colors hover:text-brand"
             >
               Track Donation
             </Link>
