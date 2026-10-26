@@ -13,12 +13,12 @@ import { cn } from '@/lib/utils';
  * so a production build never advertises a shared password.
  */
 const DEMO = [
-  { label: 'Admin', email: 'admin@daansetu.in' },
+  { label: 'Admin', email: 'admin@pradanamsutra.org' },
   { label: 'Dil Dosa Etc.', email: 'kitchen@dildosa.in' },
-  { label: 'Parbhat', email: 'parbhat@daansetu.in' },
-  { label: 'Donor', email: 'donor@daansetu.in' },
+  { label: 'Parbhat', email: 'parbhat@pradanamsutra.org' },
+  { label: 'Donor', email: 'donor@pradanamsutra.org' },
 ];
-const DEMO_PASSWORD = 'DaanSetu@2026';
+const DEMO_PASSWORD = 'PradanamSutra@2026';
 const SHOW_DEMO = process.env.NEXT_PUBLIC_SHOW_DEMO_LOGINS === 'true';
 
 /** A redirect target is only honoured if it is a path on this site. */
