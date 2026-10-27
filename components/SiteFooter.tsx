@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { LogoMark, BRAND_NAME } from './Logo';
+import { SITE_DOMAIN } from '@/lib/config';
 
 /**
  * Deliberately short. The donation menu is reached by scanning a restaurant's
@@ -51,7 +52,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-paper/12 pt-7 text-[12px] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Pradanam Sutra · daansetu.in</p>
+          <p>© {new Date().getFullYear()} Pradanam Sutra · {SITE_DOMAIN}</p>
           <p className="flex items-center gap-2">
             <span className="size-1.5 rounded-full bg-brand-mid" />
             100% of every donation reaches the kitchen.

@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/lib/auth-context';
 import { ToastProvider } from '@/components/Toast';
+import { SITE_URL } from '@/lib/config';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -20,7 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://daansetu.in'),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'Pradanam Sutra — A meal, traced from your hand to theirs',
     template: '%s · Pradanam Sutra',

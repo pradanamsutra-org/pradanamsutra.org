@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { Logo } from '@/components/Logo';
+import { SITE_DOMAIN } from '@/lib/config';
 
 const ASIDE_IMAGE =
   'https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=1200&q=85';
@@ -33,7 +34,7 @@ export function AuthShell({
 
         <p className="text-[12px] text-ink-mute">
           <Link href="/" className="transition-colors hover:text-brand">
-            ← Back to daansetu.in
+            ← Back to {SITE_DOMAIN}
           </Link>
         </p>
       </div>

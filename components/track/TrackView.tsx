@@ -31,6 +31,7 @@ import {
   type Ngo,
   type TrackedBatch,
 } from "@/lib/types";
+import { SITE_URL } from "@/lib/config";
 
 export function TrackView({
   donation,
@@ -79,7 +80,7 @@ export function TrackView({
 
   const trackingUrl =
     typeof window === "undefined"
-      ? `https://daansetu.in/track/${donation.donationId}`
+      ? `${SITE_URL}/track/${donation.donationId}`
       : `${window.location.origin}/track/${donation.donationId}`;
 
   const copyLink = async () => {

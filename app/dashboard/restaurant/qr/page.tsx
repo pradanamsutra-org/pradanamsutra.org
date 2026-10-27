@@ -7,6 +7,7 @@ import { get } from '@/lib/api';
 import { useToast } from '@/components/Toast';
 import { PageHeading } from '@/components/dashboard/DashboardShell';
 import { LoadError } from '@/components/dashboard/LoadError';
+import { SITE_DOMAIN } from '@/lib/config';
 
 interface QrData {
   url: string;
@@ -42,7 +43,7 @@ export default function QrPage() {
     if (!data) return;
     const a = document.createElement('a');
     a.href = data.dataUrl;
-    a.download = `daansetu-qr-${data.restaurantName.toLowerCase().replace(/\s+/g, '-')}.png`;
+    a.download = `pradanam-sutra-qr-${data.restaurantName.toLowerCase().replace(/\s+/g, '-')}.png`;
     a.click();
   };
 
@@ -97,7 +98,7 @@ export default function QrPage() {
               Scan to fund a dish at half price. We match the other half, and you can follow it all
               the way to the person who receives it.
             </p>
-            <p className="mt-4 font-display text-[15px] italic text-brand">daansetu.in</p>
+            <p className="mt-4 font-display text-[15px] italic text-brand">{SITE_DOMAIN}</p>
           </div>
 
           <div className="mt-6 flex gap-3">
