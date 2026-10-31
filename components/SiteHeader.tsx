@@ -15,6 +15,7 @@ const LINKS = [
   { href: '/#how', label: 'How it works' },
   { href: DONATE_HREF, label: 'Dil Dosa Etc.' },
   { href: '/track', label: 'Track Donation' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export function SiteHeader() {

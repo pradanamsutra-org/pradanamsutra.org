@@ -13,6 +13,7 @@ const LINKS = [
   { href: '/#transparency', label: 'Transparency promise' },
   { href: '/track', label: 'Track a donation' },
   { href: '/join', label: 'Partner with us' },
+  { href: '/contact', label: 'Contact us' },
   { href: '/login', label: 'Partner sign in' },
 ];
 
