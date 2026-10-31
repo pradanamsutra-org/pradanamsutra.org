@@ -8,13 +8,20 @@ import { SITE_DOMAIN } from '@/lib/config';
  * onboarded. Signing in lives down here rather than in the header: only
  * kitchens, NGOs and admins have accounts, and a guest never needs one.
  */
-const LINKS = [
+const PLATFORM_LINKS = [
   { href: '/#how', label: 'How it works' },
   { href: '/#transparency', label: 'Transparency promise' },
   { href: '/track', label: 'Track a donation' },
   { href: '/join', label: 'Partner with us' },
   { href: '/contact', label: 'Contact us' },
   { href: '/login', label: 'Partner sign in' },
+];
+
+const LEGAL_LINKS = [
+  { href: '/terms', label: 'Terms & Conditions' },
+  { href: '/privacy', label: 'Privacy Policy' },
+  { href: '/refunds', label: 'Refunds & Cancellations' },
+  { href: '/terms?tab=fulfillment', label: 'Fulfillment & Delivery' },
 ];
 
 export function SiteFooter() {
@@ -35,21 +42,39 @@ export function SiteFooter() {
             </p>
           </div>
 
-          <nav className="md:text-right">
-            <p className="eyebrow text-paper/40">Platform</p>
-            <ul className="mt-5 space-y-3">
-              {LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-[13.5px] text-paper/65 transition-colors duration-300 hover:text-paper"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+          <div className="flex flex-wrap gap-12 sm:gap-16 md:text-right">
+            <nav>
+              <p className="eyebrow text-paper/40">Platform</p>
+              <ul className="mt-5 space-y-3">
+                {PLATFORM_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-[13.5px] text-paper/65 transition-colors duration-300 hover:text-paper"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+
+            <nav>
+              <p className="eyebrow text-paper/40">Policies</p>
+              <ul className="mt-5 space-y-3">
+                {LEGAL_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="text-[13.5px] text-paper/65 transition-colors duration-300 hover:text-paper"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </div>
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-paper/12 pt-7 text-[12px] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
