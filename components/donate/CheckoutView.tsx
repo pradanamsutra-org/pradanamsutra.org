@@ -10,6 +10,7 @@ import { useToast } from '@/components/Toast';
 import { useAuth } from '@/lib/auth-context';
 import { post, ApiError } from '@/lib/api';
 import { readCart, clearCart, cartTotals, type CartLine } from '@/lib/cart';
+import { loadCashfree } from '@/lib/cashfree';
 import { loadRazorpay } from '@/lib/razorpay';
 import { formatInr, cn } from '@/lib/utils';
 import { splitPrice, type MenuItem, type Restaurant, type Ngo, type Donation } from '@/lib/types';
@@ -21,12 +22,14 @@ interface Props {
 }
 
 interface OrderResponse {
-  mode: 'razorpay' | 'mock';
+  mode: 'cashfree' | 'razorpay' | 'mock';
   orderId: string;
+  paymentSessionId: string | null;
   amountPaise: number;
   currency: string;
   keyId: string | null;
   donationId: string;
+  cfEnvironment: 'sandbox' | 'production' | null;
 }
 
 export function CheckoutView({ restaurant, items, ngo }: Props) {
@@ -123,23 +126,65 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
       const donationId = created.donation.donationId;
       const order = await post<OrderResponse>('/payments/order', { donationId });
 
-      // With no Razorpay keys configured the API runs a mock gateway: the same
+      // With no live keys configured the API runs a mock gateway: the same
       // create-order → verify → record path executes, so the flow is testable
-      // end to end locally. Real keys switch this to Razorpay automatically.
+      // end to end locally. Real keys switch this to Cashfree automatically.
       if (order.mode === 'mock') {
         setStage('paying');
         await new Promise((r) => setTimeout(r, 900));
         setStage('verifying');
         await post('/payments/verify', {
           donationId,
-          razorpayOrderId: order.orderId,
-          razorpayPaymentId: `pay_mock_${Date.now()}`,
-          razorpaySignature: 'mock_signature',
+          orderId: order.orderId,
         });
         finish(donationId);
         return;
       }
 
+      if (order.mode === 'cashfree') {
+        const ready = await loadCashfree();
+        if (!ready || !window.Cashfree) {
+          throw new Error('Could not reach Cashfree payment gateway. Check your connection.');
+        }
+
+        if (!order.paymentSessionId) {
+          throw new Error('Cashfree session could not be established.');
+        }
+
+        setStage('paying');
+        const cashfree = window.Cashfree({
+          mode: order.cfEnvironment ?? 'production',
+        });
+
+        const result = await cashfree.checkout({
+          paymentSessionId: order.paymentSessionId,
+          redirectTarget: '_modal',
+        });
+
+        if (result?.error) {
+          push(result.error.message || 'Payment cancelled. Your selection is still here.', 'info');
+          setSubmitting(false);
+          setStage('idle');
+          return;
+        }
+
+        // Verify with backend directly
+        try {
+          setStage('verifying');
+          await post('/payments/verify', {
+            donationId,
+            orderId: order.orderId,
+          });
+          finish(donationId);
+        } catch (err) {
+          push(err instanceof ApiError ? err.message : 'Payment verification failed.', 'error');
+          setSubmitting(false);
+          setStage('idle');
+        }
+        return;
+      }
+
+      // Fallback for legacy Razorpay
       const ready = await loadRazorpay();
       if (!ready || !window.Razorpay) {
         throw new Error('Could not reach the payment gateway. Check your connection.');
@@ -155,16 +200,12 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
         order_id: order.orderId,
         prefill: { name: form.name, contact: form.phone },
         theme: { color: '#0d4b38' },
-        handler: async (response) => {
-          // The gateway's word is not enough: the API verifies the signature
-          // before a donation is ever marked paid.
+        handler: async () => {
           try {
             setStage('verifying');
             await post('/payments/verify', {
               donationId,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpaySignature: response.razorpay_signature,
+              orderId: order.orderId,
             });
             finish(donationId);
           } catch (err) {
