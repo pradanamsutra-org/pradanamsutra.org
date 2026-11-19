@@ -20,3 +20,11 @@ export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://www.pradan
 
 /** The same address as a person would write it: no scheme, no www. */
 export const SITE_DOMAIN = SITE_URL.replace(/^https?:\/\//, '').replace(/^www\./, '');
+
+/**
+ * The company behind the brand. Payment gateways verify that the registered
+ * legal name appears on the site before they will process live payments, and
+ * "Pradanam Sutra" is a trading name, not the entity — so the entity is named
+ * in the footer of every page and spelled out on the contact page.
+ */
+export const LEGAL_ENTITY = 'PROHELPERS PRIVATE LIMITED';

@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ArrowRight, HelpCircle, Store, HeartHandshake, ShieldCheck } from 'lucide-react';
+import { ArrowRight, HelpCircle, Store, HeartHandshake, ShieldCheck, Building2 } from 'lucide-react';
 import { SiteHeader } from '@/components/SiteHeader';
 import { SiteFooter } from '@/components/SiteFooter';
 import { ContactCards } from '@/components/contact/ContactCards';
 import { ContactForm } from '@/components/contact/ContactForm';
+import { LEGAL_ENTITY, SITE_DOMAIN } from '@/lib/config';
 
 export const metadata: Metadata = {
   title: 'Contact Us — Pradanam Sutra',
@@ -71,6 +72,65 @@ export default function ContactPage() {
         {/* Quick Contact Cards */}
         <section className="container-lux py-12 md:py-16">
           <ContactCards />
+        </section>
+
+        {/*
+          The registered entity, stated plainly. A payment gateway checks that
+          the legal name on the merchant account appears on the site before it
+          will clear live transactions, and this is the page it is pointed at.
+        */}
+        <section className="container-lux pb-12 md:pb-16">
+          <div className="rounded-[22px] border border-line bg-surface p-7 md:p-9">
+            <div className="flex items-center gap-2.5 text-brand">
+              <Building2 size={17} strokeWidth={1.8} />
+              <p className="eyebrow !text-brand">Registered business</p>
+            </div>
+
+            <dl className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              <div>
+                <dt className="text-[10.5px] uppercase tracking-[0.12em] text-ink-mute">
+                  Legal name
+                </dt>
+                <dd className="mt-2 font-display text-[16px] font-medium tracking-[-0.015em] text-ink">
+                  {LEGAL_ENTITY}
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[10.5px] uppercase tracking-[0.12em] text-ink-mute">
+                  Trading as
+                </dt>
+                <dd className="mt-2 font-display text-[16px] font-medium tracking-[-0.015em] text-ink">
+                  Pradanam Sutra
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[10.5px] uppercase tracking-[0.12em] text-ink-mute">
+                  Email
+                </dt>
+                <dd className="mt-2 break-all text-[14px] text-ink">
+                  <a className="hover:text-brand" href="mailto:pradanamsutra.org@gmail.com">
+                    pradanamsutra.org@gmail.com
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt className="text-[10.5px] uppercase tracking-[0.12em] text-ink-mute">
+                  Phone
+                </dt>
+                <dd className="mt-2 text-[14px] text-ink">
+                  <a className="hover:text-brand" href="tel:+918130809374">
+                    +91 8130809374
+                  </a>
+                </dd>
+              </div>
+            </dl>
+
+            <p className="mt-7 border-t border-line pt-5 text-[13px] leading-relaxed text-ink-soft">
+              Pradanam Sutra is the trading name under which {LEGAL_ENTITY} operates{' '}
+              {SITE_DOMAIN}. All payments collected through this site are processed by{' '}
+              {LEGAL_ENTITY}.
+            </p>
+          </div>
         </section>
 
         {/* Interactive Form & Partner Guidance */}

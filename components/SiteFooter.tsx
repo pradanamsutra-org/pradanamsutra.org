@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { LogoMark, BRAND_NAME } from './Logo';
-import { SITE_DOMAIN } from '@/lib/config';
+import { SITE_DOMAIN, LEGAL_ENTITY } from '@/lib/config';
 
 /**
  * Deliberately short. The donation menu is reached by scanning a restaurant's
@@ -40,6 +40,11 @@ export function SiteFooter() {
               A bridge between a kitchen that can cook one more meal and a person who needs it —
               with every step on the record.
             </p>
+            {/* The trading name is what guests know us by; the entity behind it
+                has to be stated plainly, and on every page. */}
+            <p className="mt-4 text-[12.5px] leading-relaxed text-paper/45">
+              {BRAND_NAME} is a service of {LEGAL_ENTITY}.
+            </p>
           </div>
 
           <div className="flex flex-wrap gap-12 sm:gap-16 md:text-right">
@@ -78,7 +83,7 @@ export function SiteFooter() {
         </div>
 
         <div className="mt-12 flex flex-col gap-3 border-t border-paper/12 pt-7 text-[12px] text-paper/40 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Pradanam Sutra · {SITE_DOMAIN}</p>
+          <p>© {new Date().getFullYear()} {LEGAL_ENTITY} · {SITE_DOMAIN}</p>
           <p className="flex items-center gap-2">
             <span className="size-1.5 rounded-full bg-brand-mid" />
             100% of every donation reaches the kitchen.
