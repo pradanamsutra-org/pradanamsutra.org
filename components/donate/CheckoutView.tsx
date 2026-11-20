@@ -322,7 +322,14 @@ export function CheckoutView({ restaurant, items, ngo }: Props) {
                   id="donor-phone"
                   ref={phoneRef}
                   type="tel"
-                  required
+                  /*
+                   * aria-required, not the HTML attribute: this screen does its
+                   * own checking — it scrolls to the field, rings it red and
+                   * says what is wrong — and a native `required` would fire the
+                   * browser's own grey bubble over the top of that the moment
+                   * anything wraps this in a form. Screen readers still hear
+                   * that the field is needed.
+                   */
                   aria-required="true"
                   aria-invalid={Boolean(errors.phone)}
                   inputMode="numeric"
