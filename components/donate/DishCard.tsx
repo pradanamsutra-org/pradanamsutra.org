@@ -25,10 +25,12 @@ interface Props {
   onChange: (n: number) => void;
   restaurantName: string;
   activeBatch?: { collectedQuantity: number; targetQuantity: number };
+  /** Giving is closed platform-wide; the stepper greys out and says so. */
+  disabled?: boolean;
 }
 
 /** Large editorial card for the kitchen's signature dishes. */
-export function SignatureDishCard({ item, quantity, onChange, restaurantName, activeBatch }: Props) {
+export function SignatureDishCard({ item, quantity, onChange, restaurantName, activeBatch, disabled }: Props) {
   return (
     <article className="group overflow-hidden rounded-[20px] border border-line bg-surface transition-colors duration-500 hover:border-brand/25">
       <div className="relative aspect-[16/10] overflow-hidden">
@@ -84,7 +86,8 @@ export function SignatureDishCard({ item, quantity, onChange, restaurantName, ac
             customerSharePercent={item.customerSharePercent}
             restaurantName={restaurantName}
           />
-          <Stepper value={quantity} onChange={onChange} label={item.name} />
+          <Stepper
+          disabled={disabled} value={quantity} onChange={onChange} label={item.name} />
         </div>
       </div>
     </article>
@@ -92,7 +95,7 @@ export function SignatureDishCard({ item, quantity, onChange, restaurantName, ac
 }
 
 /** Compact row for the rest of the menu. */
-export function CompactDishCard({ item, quantity, onChange, restaurantName, activeBatch }: Props) {
+export function CompactDishCard({ item, quantity, onChange, restaurantName, activeBatch, disabled }: Props) {
   return (
     <article className="group flex gap-4 rounded-[18px] border border-line bg-surface p-3.5 transition-colors duration-500 hover:border-brand/25 sm:gap-5 sm:p-4">
       <div className="relative size-[92px] shrink-0 overflow-hidden rounded-[13px] sm:size-[110px]">
@@ -145,7 +148,8 @@ export function CompactDishCard({ item, quantity, onChange, restaurantName, acti
             restaurantName={restaurantName}
             size="sm"
           />
-          <Stepper value={quantity} onChange={onChange} size="sm" label={item.name} />
+          <Stepper
+          disabled={disabled} value={quantity} onChange={onChange} size="sm" label={item.name} />
         </div>
       </div>
     </article>

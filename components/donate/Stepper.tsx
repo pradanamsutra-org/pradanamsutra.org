@@ -8,11 +8,18 @@ export function Stepper({
   onChange,
   size = 'md',
   label,
+  disabled = false,
 }: {
   value: number;
   onChange: (next: number) => void;
   size?: 'sm' | 'md';
   label: string;
+  /**
+   * Giving is closed. The control stays clickable on purpose — a dead button
+   * tells a guest nothing, so the click still lands and the page explains
+   * itself instead.
+   */
+  disabled?: boolean;
 }) {
   const pad = size === 'sm' ? 'h-9' : 'h-11';
   const btn = size === 'sm' ? 'size-9' : 'size-11';
@@ -23,7 +30,10 @@ export function Stepper({
         onClick={() => onChange(1)}
         aria-label={`Add ${label}`}
         className={cn(
-          'btn btn-outline shrink-0 border-brand/30 px-5 text-brand hover:bg-brand hover:text-paper',
+          'btn btn-outline shrink-0 px-5',
+          disabled
+            ? 'border-line text-ink-mute hover:bg-paper-deep'
+            : 'border-brand/30 text-brand hover:bg-brand hover:text-paper',
           pad
         )}
       >

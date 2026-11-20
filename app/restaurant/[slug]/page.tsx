@@ -13,6 +13,8 @@ interface RecentDonation {
 
 interface PageData {
   restaurant: Restaurant;
+  donationsEnabled: boolean;
+  donationsPausedNote?: string;
   items: MenuItem[];
   partners: Ngo[];
   activeBatches: {
@@ -51,6 +53,8 @@ export default async function RestaurantPage({ params }: { params: Promise<{ slu
       partners={data.partners ?? []}
       activeBatches={data.activeBatches ?? []}
       recentDonations={data.recentDonations ?? []}
+      donationsEnabled={data.donationsEnabled ?? true}
+      donationsPausedNote={data.donationsPausedNote}
     />
   );
 }

@@ -7,6 +7,7 @@ import { get } from '@/lib/api';
 import { PageHeading, StatCard } from '@/components/dashboard/DashboardShell';
 import { LoadError } from '@/components/dashboard/LoadError';
 import { BarChart, type Point } from '@/components/dashboard/BarChart';
+import { DonationsSwitch } from '@/components/admin/DonationsSwitch';
 import { formatInr, formatNumber, formatDate } from '@/lib/utils';
 import { DONATION_STATUSES, STATUS_META } from '@/lib/types';
 
@@ -68,6 +69,12 @@ export default function AdminOverview() {
         title="Everything, at a glance"
         description="Meals funded across every kitchen, and anything that needs a decision from you."
       />
+
+      {/* The one control on this page rather than a figure: it belongs where
+          an admin already looks when something is wrong. */}
+      <div className="pb-6">
+        <DonationsSwitch />
+      </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <StatCard

@@ -11,10 +11,12 @@ import {
   MapPin,
   ShieldCheck,
   Quote,
+  PauseCircle,
 } from 'lucide-react';
 import { Logo } from '@/components/Logo';
 import { SiteFooter } from '@/components/SiteFooter';
 import { Reveal } from '@/components/Reveal';
+import { useToast } from '@/components/Toast';
 import { CountUp } from '@/components/CountUp';
 import { SignatureDishCard, CompactDishCard } from './DishCard';
 import { saveCart, cartTotals, type CartLine } from '@/lib/cart';
@@ -40,14 +42,27 @@ interface Props {
     collectedQuantity: number;
   }[];
   recentDonations: RecentDonation[];
+  /** False when an admin has closed giving across the whole platform. */
+  donationsEnabled?: boolean;
+  /** What to tell guests while it is closed, if the admin left a note. */
+  donationsPausedNote?: string;
 }
 
 /** The translucent pill used over the cover artwork, wherever it sits. */
 const COVER_CHIP =
   'inline-flex items-center gap-1.5 rounded-full border border-paper/25 bg-paper/12 px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.12em] text-paper backdrop-blur-sm';
 
-export function RestaurantView({ restaurant, items, partners, activeBatches, recentDonations }: Props) {
+export function RestaurantView({
+  restaurant,
+  items,
+  partners,
+  activeBatches,
+  recentDonations,
+  donationsEnabled = true,
+  donationsPausedNote,
+}: Props) {
   const router = useRouter();
+  const { push } = useToast();
   const { island: headerIsland, hidden: headerHidden } = useHeaderScroll();
   const [quantities, setQuantities] = useState<Record<string, number>>({});
   const [category, setCategory] = useState('All');
@@ -70,10 +85,26 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
   );
 
   const totals = cartTotals(lines);
-  const setQty = (id: string, n: number) =>
+  const pausedMessage = donationsPausedNote?.trim() || 'Donations are currently off.';
+
+  /*
+   * The one place a dish enters the cart, so it is the one place that has to
+   * refuse. The API refuses too — this is only so a guest finds out on the
+   * first tap rather than at the payment screen.
+   */
+  const setQty = (id: string, n: number) => {
+    if (!donationsEnabled) {
+      push(pausedMessage, 'info');
+      return;
+    }
     setQuantities((prev) => ({ ...prev, [id]: Math.max(0, n) }));
+  };
 
   const proceed = () => {
+    if (!donationsEnabled) {
+      push(pausedMessage, 'info');
+      return;
+    }
     saveCart(restaurant, lines);
     router.push(`/restaurant/${restaurant.slug}/checkout`);
   };
@@ -341,6 +372,26 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
               </p>
             </div>
 
+            {/* Said once, up front — a guest should not have to tap an Add
+                button to find out that giving is closed. The menu stays on
+                screen so they can see what will be here when it reopens. */}
+            {!donationsEnabled && (
+              <div
+                role="status"
+                className="mt-7 flex items-start gap-3 rounded-[18px] border border-amber/30 bg-amber-tint px-5 py-4"
+              >
+                <PauseCircle size={18} strokeWidth={1.8} className="mt-0.5 shrink-0 text-amber" />
+                <div>
+                  <p className="text-[14px] font-medium text-amber">{pausedMessage}</p>
+                  <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">
+                    The menu below is still {restaurant.name}&rsquo;s. Nothing can be funded until
+                    giving reopens — every donation already in flight carries on as normal, and you
+                    can still follow it on the tracking page.
+                  </p>
+                </div>
+              </div>
+            )}
+
             {activeBatches.length > 0 && (
               <div className="mt-8">
                 <p className="text-[11.5px] font-medium uppercase tracking-[0.1em] text-ink-mute">
@@ -444,6 +495,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       onChange={(n) => setQty(item._id, n)}
                       restaurantName={restaurant.name}
                       activeBatch={activeBatches.find(b => b.menuItem === item._id)}
+                      disabled={!donationsEnabled}
                     />
                   </Reveal>
                 ))}
@@ -460,6 +512,7 @@ export function RestaurantView({ restaurant, items, partners, activeBatches, rec
                       onChange={(n) => setQty(item._id, n)}
                       restaurantName={restaurant.name}
                       activeBatch={activeBatches.find(b => b.menuItem === item._id)}
+                      disabled={!donationsEnabled}
                     />
                   </Reveal>
                 ))}
